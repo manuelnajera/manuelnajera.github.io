@@ -42,14 +42,14 @@ creative_commons:
 # seo meta this is needed for each language
 # If meta_description is not defined in front matter, it's created from (post / page) content,
 # if it has no content, this will be used for page description. It is also used in manifest.json
-meta_common_description: "Your meta description."
+meta_common_description: "Cybersecurity & AI Engineer with expertise in penetration testing, secure development, and machine learning models."
 
 # contact options (side nav bottom and about page)
 # the order of the items will be shown as here.
 # comment to remove any contact item
 contacts:
   - github: "manuelnajera"
-  #- email: ""
+  - email: "cyberguardian02@proton.me"
   #- linkedin: ""
   #- twitter: ""
   #- mastodon: ""
@@ -69,14 +69,14 @@ comments:
   # - Get the corresponding items and fill in the items below.
   # For other settings, please check the _data/conf/posts.yml file.
   giscus:
-    repo: ""
-    repo-id: ""
-    category: ""
-    category-id: ""
+    repo: "manuelnajera/manuelnajera.github.io"
+    repo-id: "R_kgDOOR_igg"
+    category: "General"
+    category-id: "DIC_kwDOOR_igs4Cou7i"
 
 # if no id is provided, this feature will be disabled.
 # make sure your environment does not match with google.analytics.ignore in _data/conf/main.yml
-google_analytics_id: ""
+google_analytics_id: "G-XVST80YCMY"
 
 # there are different ways to verify web page. One is adding this as meta into html.
 # make sure you set meta.google_site_verify: true in _data/conf/main.yml

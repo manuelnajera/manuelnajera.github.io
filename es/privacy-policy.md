@@ -38,9 +38,61 @@ search_engine_exclude: true
 
 {%- comment -%} Please delete below and place your page content here {%- endcomment -%}
 
-{%- include util/auto-content-generator.liquid -%}
-{{ page_title_text }}
+# Política de Privacidad
 
-{{ website_info_text_first | replace: website_greeting_text, '' }}
+### Última actualización: Marzo 2024
 
-{{ website_info_text_second }}
+Gracias por visitar este sitio web. Tu privacidad es importante para mí. Esta Política de Privacidad explica cómo se recopila, usa y protege tu información personal cuando visitas este sitio.
+
+#### 1. Información Recopilada
+
+Este sitio web no recopila información personal a menos que se proporcione voluntariamente (por ejemplo, a través de un formulario de contacto o suscripción por correo electrónico). Los siguientes tipos de datos no personales pueden recopilarse automáticamente:
+
+Dirección IP
+
+Tipo y versión del navegador
+
+Páginas visitadas y tiempo de permanencia en el sitio
+
+Sitio web de referencia
+
+Cookies (si aplica)
+
+#### 2. Uso de la Información
+
+Los datos recopilados se utilizan para:
+
+Mejorar el rendimiento y contenido del sitio web
+
+Responder consultas (si se proporciona información de contacto)
+
+Analizar patrones de tráfico para optimización
+
+#### 3. Cookies
+
+Este sitio web puede utilizar cookies para mejorar la experiencia del usuario. Puedes administrar tus preferencias de cookies a través de la configuración de tu navegador.
+
+#### 4. Servicios de Terceros
+
+Pueden utilizarse servicios externos (como herramientas de análisis) para mejorar el sitio. Estos terceros tienen sus propias políticas de privacidad sobre la recopilación de datos.
+
+#### 5. Protección de Datos
+
+Se implementan medidas de seguridad adecuadas para proteger los datos contra accesos no autorizados o divulgación.
+
+#### 6. Tus Derechos
+
+Tienes derecho a:
+
+Solicitar acceso a tus datos
+
+Solicitar la corrección o eliminación de datos personales (si aplica)
+
+Retirar el consentimiento para la recopilación de datos
+
+#### 7. Cambios en Esta Política
+
+Esta Política de Privacidad puede actualizarse periódicamente. La versión más reciente siempre estará disponible en esta página.
+
+Para cualquier consulta sobre esta política, por favor contáctame en cyberguardian02@proton.me.
+

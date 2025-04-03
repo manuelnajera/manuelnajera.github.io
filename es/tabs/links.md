@@ -41,18 +41,18 @@ lng_pair: id_links
 ###########################################################
 page_data:
   main:
-    header: "Links"
-    info: "Your Links page description."
+    header: "Enlaces"
+    info: "Enlaces útiles en diversos temas."
 
   # To change order of the Categories, simply change order. (you don't need to change list order.)
   category:
     - title: "JekyII / Liquid"
       type: id_jekyiiliquid
       color: "gray"
-    - title: "Web Design"
+    - title: "Diseño Web"
       type: id_webdesign
       color: "#F4A273"
-    - title: "Programming"
+    - title: "Programación"
       type: id_programming
       color: "#62b462"
 

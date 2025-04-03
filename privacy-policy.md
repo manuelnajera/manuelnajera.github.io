@@ -38,9 +38,60 @@ search_engine_exclude: true
 
 {%- comment -%} Please delete below and place your page content here {%- endcomment -%}
 
-{%- include util/auto-content-generator.liquid -%}
-{{ page_title_text }}
+# Privacy Policy
 
-{{ website_info_text_first | replace: website_greeting_text, '' }}
+### Last updated: March 2024
 
-{{ website_info_text_second }}
+Thank you for visiting this website. Your privacy is important to me. This Privacy Policy explains how your personal information is collected, used, and protected when you visit this site.
+
+#### 1. Information Collected
+
+This website does not collect personal information unless voluntarily provided (e.g., through a contact form or email subscription). The following types of non-personal data may be collected automatically:
+
+IP address
+
+Browser type and version
+
+Pages visited and time spent on the site
+
+Referring website
+
+Cookies (if applicable)
+
+#### 2. Use of Information
+
+The collected data is used to:
+
+Improve website performance and content
+
+Respond to inquiries (if contact information is provided)
+
+Analyze traffic patterns for optimization
+
+#### 3. Cookies
+
+This website may use cookies to enhance user experience. You can manage cookie preferences through your browser settings.
+
+#### 4. Third-Party Services
+
+External services (such as analytics tools) may be used to improve the site. These third parties have their own privacy policies regarding data collection.
+
+#### 5. Data Protection
+
+Appropriate security measures are in place to protect data from unauthorized access or disclosure.
+
+#### 6. Your Rights
+
+You have the right to:
+
+Request access to your data
+
+Request correction or deletion of personal data (if applicable)
+
+Withdraw consent for data collection
+
+#### 7. Changes to This Policy
+
+This Privacy Policy may be updated from time to time. The latest version will always be available on this page.
+
+For any questions regarding this policy, please contact me at cyberguardian02@proton.me.
