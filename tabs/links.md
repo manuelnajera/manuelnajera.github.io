@@ -42,7 +42,7 @@ lng_pair: id_links
 page_data:
   main:
     header: "Links"
-    info: "Your Links page description."
+    info: "Useful links on various topics."
 
   # To change order of the Categories, simply change order. (you don't need to change list order.)
   category:
@@ -87,6 +87,10 @@ page_data:
       info: "Liquid is a template language created by Shopify and written in Ruby. It is now available as an open source project on GitHub."
 
     # webdesign
+    - type: id_webdesign
+      title: "The Odin Project"
+      url: "https://www.theodinproject.com/"
+      info: 'The Odin Project is one of those "What I wish I had when I was learning" resources. Not everyone has access to a computer science education or the funds to attend an intensive coding school and neither of those is right for everyone anyway. This project is designed to fill in the gap for people who are trying to hack it on their own but still want a high quality education.'
     - type: id_webdesign
       title: "W3Schools"
       url: "https://www.w3schools.com/"
