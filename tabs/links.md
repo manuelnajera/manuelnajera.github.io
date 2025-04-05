@@ -41,8 +41,8 @@ lng_pair: id_links
 ###########################################################
 page_data:
   main:
-    header: "Links"
-    info: "Useful links on various topics."
+    header: "Resources"
+    info: "Useful and valuable external links on various topics."
 
   # To change order of the Categories, simply change order. (you don't need to change list order.)
   category:
