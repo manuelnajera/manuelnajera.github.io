@@ -1,11 +1,11 @@
-name: MrGreen-JekyllTheme jekyll build test
+name: manuelnajera.github.io jekyll build test
 
 # on a push or pull request is made on the main branch
 on:
   push:
     paths-ignore:
       - 'docs/**'
-      - '.github/**'
+      #- '.github/**'
       - '.editorconfig'
       - '.gitattributes'
       - '.gitignore'
@@ -15,7 +15,7 @@ on:
   pull_request:
     paths-ignore:
       - 'docs/**'
-      - '.github/**'
+      #- '.github/**'
       - '.editorconfig'
       - '.gitattributes'
       - '.gitignore'

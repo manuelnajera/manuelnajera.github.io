@@ -7,7 +7,7 @@ on:
 
 jobs:
   create-release:
-    if: ${{ github.repository == 'MrGreensWorkshop/MrGreen-JekyllTheme' && startsWith(github.ref, 'refs/tags/v') }}
+    if: ${{ github.repository == 'manuelnajera/manuelnajera.github.io' && startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout

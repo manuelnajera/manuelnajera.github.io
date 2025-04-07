@@ -11,11 +11,9 @@ body:
     label: Please check these items before go any further
     description: Please search to see if an issue already exists for the bug you encountered.
     options:
-    - label: I have watched [Mr. Green theme tutorials playlist](https://www.youtube.com/playlist?list=PLAymxPbYHgl-fFy5can7uZBMJtFWVcphD) on YouTube.
+    - label: I have searched the existing [Issues](https://github.com/manuelnajera/manuelnajera.github.io/issues/).
       required: true
-    - label: I have searched the existing [Issues](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/issues/).
-      required: true
-    - label: I have searched the existing [Discussions](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/discussions/).
+    - label: I have searched the existing [Discussions](https://github.com/manuelnajera/manuelnajera.github.io/discussions/).
       required: true
     - label: I have checked [jekyll docs](https://jekyllrb.com/docs/) and the answer was not there.
       required: true
@@ -26,7 +24,7 @@ body:
     label: Are you sure this is a bug?
     description: |
       The Issues in this repo is only used for 'Bug reports' or 'Feature requests'.
-      If you are not sure if this is a bug or not, please ask a question from [Discussions](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/issues/new?assignees=&labels=delete+me&template=a_questions.yml&title=%3Ctitle%3E).
+      If you are not sure if this is a bug or not, please ask a question from [Discussions](https://github.com/manuelnajera/manuelnajera.github.io/issues/new?assignees=&labels=delete+me&template=a_questions.yml&title=%3Ctitle%3E).
     options:
     - label: I'm sure this is definitely a bug.
       required: true
