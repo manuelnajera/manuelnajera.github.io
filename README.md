@@ -42,6 +42,11 @@ If you find this project useful or believe in my work, consider supporting me:
 
 👉 [Become a GitHub Sponsor](https://github.com/sponsors/manuelnajera)
 
+## 🤝 Contributing
+
+Got ideas or spotted something that could be improved?  
+Feel free to open an issue or send a pull request. Contributions are always welcome! 🙌
+
 ## Credits
 This website is built using the [Mr. Green Jekyll Theme](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme) by Mr.Green. Full credit and license info below.
 
@@ -51,21 +56,22 @@ This website is built using the [Mr. Green Jekyll Theme](https://github.com/MrGr
 
 Please note that this theme is under the MIT license, and I have made site-specific customizations.
 
-## 🤝 Contributing
-
-Got ideas or spotted something that could be improved?  
-Feel free to open an issue or send a pull request. Contributions are always welcome! 🙌
-
 ## License
 
 ### Code
 
-This site uses parts of a theme by Mr. Green’s Workshop, licensed under the MIT License.  
-All site-specific code and customizations are licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This site uses parts of the theme created by Mr. Green’s Workshop, licensed under the MIT License.  
+All custom code specific to this site, including modifications and new features such as 3D visualizations with Three.js, is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
-As it says in the [MIT license](https://github.com/manuelnajera/manuelnajera.github.io/blob/main/LICENSE.txt), you can use this theme anywhere as long as you include the license and copyright notice.
+As stated in the [MIT license](https://github.com/manuelnajera/manuelnajera.github.io/blob/main/LICENSE.txt), you may use this theme anywhere, as long as you include the license and the copyright notice.
 
-`Copyright (c) 2022 Mr. Green's Workshop https://www.MrGreensWorkshop.com`
+This site also uses third-party libraries that are subject to their own licenses:
+
+- **Three.js** is distributed under the [MIT License](https://github.com/mrdoob/three.js/blob/dev/LICENSE).
+- Other libraries used are listed in the section [Other Licenses](#other-licenses).
+
+`Copyright (c) 2022 Mr. Green's Workshop https://www.MrGreensWorkshop.com`  
+`Copyright (c) 2024 Manuel Nájera https://manuelnajera.github.io`
 
 ### Content
 
