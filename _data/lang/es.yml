@@ -51,12 +51,12 @@ copyright:
 creative_commons:
   some_rights_reserved: Algunos derechos reservados.
   # check _data/owner/[language].yml for license type.
- 	by: Salvo que se indique lo contrario, el contenido de este sitio web está licenciado bajo una Licencia Creative Commons Atribución 4.0 Internacional.
-	by-nd: Salvo que se indique lo contrario, el contenido de este sitio web está licenciado bajo una Licencia Creative Commons Atribución-SinDerivadas 4.0 Internacional.
-	by-sa: Salvo que se indique lo contrario, el contenido de este sitio web está licenciado bajo una Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional.
-	by-nc: Salvo que se indique lo contrario, el contenido de este sitio web está licenciado bajo una Licencia Creative Commons Atribución-NoComercial 4.0 Internacional.
-	by-nc-nd: Salvo que se indique lo contrario, el contenido de este sitio web está licenciado bajo una Licencia Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional.
-	by-nc-sa: Salvo que se indique lo contrario, el contenido de este sitio web está licenciado bajo una Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional.
+  by: Salvo que se indique lo contrario, el contenido de este sitio web está bajo una licencia Creative Commons Attribution 4.0 International License.
+  by-nd: Salvo que se indique lo contrario, el contenido de este sitio web está bajo una licencia Creative Commons Attribution-NoDerivatives 4.0 International License.
+  by-sa: Salvo que se indique lo contrario, el contenido de este sitio web está bajo una licencia Creative Commons Attribution-ShareAlike 4.0 International License.
+  by-nc: Salvo que se indique lo contrario, el contenido de este sitio web está bajo una licencia Creative Commons Attribution-NonCommercial 4.0 International License.
+  by-nc-nd: Salvo que se indique lo contrario, el contenido de este sitio web está bajo una licencia Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+  by-nc-sa: Salvo que se indique lo contrario, el contenido de este sitio web está bajo una licencia Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 # for 404 layout
 not-found:
   title: "404"
