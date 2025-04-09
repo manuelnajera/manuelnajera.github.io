@@ -136,7 +136,7 @@ post-list:
 home:
   title: Bienvenido
   button_name: Inicio
-  new_posts_title: Nuevos Artículos
+  new_posts_title: Últimos hallazgos
   new_posts_show_more_button: Ver más...
 
 # for archives layout
