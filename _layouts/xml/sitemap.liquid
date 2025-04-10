@@ -56,7 +56,7 @@ xmlns:xhtml="http://www.w3.org/1999/xhtml"
     </image:image>
   {%- endif -%}
   {%- if page.add_hreflang %}
-    {%- include default/header/meta-hreflang.html pages=pages lng_pair=_page.lng_pair layout=_page.layout head="xhtml:" hreflang=true open_graph=nil -%}
+    {%- include default/header/meta-hreflang.liquid pages=pages lng_pair=_page.lng_pair layout=_page.layout head="xhtml:" hreflang=true open_graph=nil -%}
   {%- endif %}
   </url>
   {%- endfor %}

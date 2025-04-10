@@ -1,5 +1,5 @@
 ---
-layout: links
+layout: resources
 # multilingual page pair id, this must pair with translations of this page. (This name must be unique)
 lng_pair: id_links
 
@@ -41,18 +41,18 @@ lng_pair: id_links
 ###########################################################
 page_data:
   main:
-    header: "Resources"
-    info: "Useful and valuable external links on various topics."
+    header: "Recursos"
+    info: "Enlaces externos útiles y valiosos sobre varios temas."
 
   # To change order of the Categories, simply change order. (you don't need to change list order.)
   category:
     - title: "JekyII / Liquid"
       type: id_jekyiiliquid
       color: "gray"
-    - title: "Web Design"
+    - title: "Diseño Web"
       type: id_webdesign
       color: "#F4A273"
-    - title: "Programming"
+    - title: "Programación"
       type: id_programming
       color: "#62b462"
 
@@ -62,37 +62,37 @@ page_data:
     - type: id_programming
       title: "Stack OverFlow"
       url: "https://stackoverflow.com/"
-      info: "Stack Overflow is a question and answer website for professional and enthusiastic programmers."
+      info: "Stack Overflow es un sitio web de preguntas y respuestas para programadores profesionales y entusiastas."
 
     # jekyiiliquid
     - type: id_jekyiiliquid
       title: "Jekyll"
       url: "https://jekyllrb.com/"
-      info: "Transform your plain text into static websites and blogs."
+      info: "Transforme su texto plano en sitios web y blogs estáticos."
     - type: id_jekyiiliquid
-      title: "Jekyll Cheat Sheet"
+      title: "Hoja de trucos de Jekyll"
       url: "https://cloudcannon.com/community/jekyll-cheat-sheet/"
-      info: "There are so many Jekyll variables and filters to remember and it can be tricky to keep it all in your head. This cheat sheet serves as a quick reference of everything Jekyll can do."
+      info: "Hay tantas variables y filtros de Jekyll para recordar y puede ser difícil mantenerlo todo en la cabeza. Esta hoja de trucos sirve como una referencia rápida de todo lo que Jekyll puede hacer."
     - type: id_jekyiiliquid
-      title: "Liquid for Designers"
+      title: "Liquid para diseñadores"
       url: "https://github.com/Shopify/liquid/wiki/Liquid-for-Designers"
-      info: "Liquid for Designers wiki on GitHub."
+      info: "Liquid para diseñadores wiki en GitHub."
     - type: id_jekyiiliquid
-      title: "Liquid for Programmers"
+      title: "Liquid para Programadores"
       url: "https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers"
-      info: "Liquid for Programmers wiki on GitHub."
+      info: "Liquid para Programadores wiki on GitHub."
     - type: id_jekyiiliquid
-      title: "Liquid Reference"
+      title: "Referencia de Liquid"
       url: "https://shopify.dev/api/liquid/"
-      info: "Liquid is a template language created by Shopify and written in Ruby. It is now available as an open source project on GitHub."
+      info: "Liquid es un lenguaje de plantilla creado por Shopify y escrito en Ruby. Ahora está disponible como un proyecto de código abierto en GitHub."
 
     # webdesign
     - type: id_webdesign
       title: "The Odin Project"
       url: "https://www.theodinproject.com/"
-      info: 'The Odin Project is one of those "What I wish I had when I was learning" resources. Not everyone has access to a computer science education or the funds to attend an intensive coding school and neither of those is right for everyone anyway. This project is designed to fill in the gap for people who are trying to hack it on their own but still want a high quality education.'
+      info: 'The Odin Project es uno de esos recursos que "desearía haberlo tenido cuando estaba aprendiendo". No todos tienen acceso a una educación en ciencias de la computación o a los fondos para asistir a una escuela de codificación intensiva y ninguno de ellos es adecuado para todos de todos modos. Este proyecto está diseñado para llenar el vacío para las personas que intentan estudiar por su cuenta pero que aún quieren una educación de alta calidad.'
     - type: id_webdesign
       title: "W3Schools"
       url: "https://www.w3schools.com/"
-      info: "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many more."
+      info: "W3Schools ofrece tutoriales, referencias y ejercicios en línea gratuitos en todos los idiomas principales de la web. Cubriendo temas populares como HTML, CSS, JavaScript, Python, SQL, Java y muchos más."
 ---

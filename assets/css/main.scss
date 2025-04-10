@@ -133,7 +133,7 @@
 {% assign pages = site.html_pages | where_exp: "item", "item.layout == 'about'" %}
 {% if pages.size > 0 %} {% assign about_page_exist = true %} {% endif %}
 
-{% assign pages = site.html_pages | where_exp: "item", "item.layout == 'links'" %}
+{% assign pages = site.html_pages | where_exp: "item", "item.layout == 'resources'" %}
 {% if pages.size > 0 %} {% assign links_page_exist = true %} {% endif %}
 
 {% assign pages = site.html_pages | where_exp: "item", "item.layout == 'projects'" %}
@@ -261,7 +261,7 @@
 {% endif %}
 
 {% if links_page_exist %}
-  @import "links/link-style";
+  @import "resources/resources-style";
 {% endif %}
 
 {% if projects_page_exist %}

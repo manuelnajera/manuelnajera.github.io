@@ -4,8 +4,8 @@
   Licensed under MIT
 {%-endcomment-%}
 
-{% capture consent_bar_html -%} {%- include default/cookie-consent-bar.html -%} {%- endcapture %}
-{% capture consent_setting_html -%} {%- include default/cookie-consent-settings.html -%} {%- endcapture %}
+{% capture consent_bar_html -%} {%- include default/cookie-consent-bar.liquid -%} {%- endcapture %}
+{% capture consent_setting_html -%} {%- include default/cookie-consent-settings.liquid -%} {%- endcapture %}
 
 <script>
   CookieConsent.consentSettingHtml = {{ consent_setting_html | split: " " | join: " " | jsonify }};

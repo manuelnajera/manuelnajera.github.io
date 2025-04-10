@@ -17,15 +17,15 @@
     {% endif -%}
   </div>
   {%- if site.data.lang.size > 1 and site.data.conf.main.language_switch_lang_list.size > 1 and site.data.conf.main.language_switch_top_nav %}
-    {% include default/nav/lang-switch.html -%}
+    {% include default/nav/lang-switch.liquid -%}
   {% endif %}
   {% if site.data.conf.main.color_scheme_dark and site.data.conf.main.color_scheme_switch_top_nav -%}
-    {%- include default/nav/color-scheme-switch.html switch_id="color_scheme_switch_top" effect = site.data.conf.main.color_scheme_switch_top_nav_hover_effect -%}
+    {%- include default/nav/color-scheme-switch.liquid switch_id="color_scheme_switch_top" effect = site.data.conf.main.color_scheme_switch_top_nav_hover_effect -%}
   {%- endif %}
   {% unless site.data.conf.main.side_nav_toggle_button_no_top_nav_buttons -%}
   <div class="collapse navbar-collapse top-nav-buttons" id="id_top-nav-menu-toggle">
     <ul class="nav nav-pills">
-      {% include default/nav/navigation-buttons.html effect = site.data.conf.main.top_nav_buttons_hover_effect -%}
+      {% include default/nav/navigation-buttons.liquid effect = site.data.conf.main.top_nav_buttons_hover_effect -%}
     </ul>
   </div>
   {%- endunless %}

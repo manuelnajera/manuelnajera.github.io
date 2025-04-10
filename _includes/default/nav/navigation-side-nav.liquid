@@ -19,7 +19,7 @@
       <p>&nbsp;{{ site.data.owner[lng].brand_sub_text | replace: site.data.conf.main.sample_replace, site.data.lang[lng].constants.sample }}</p>
       <br>
       {%- if site.data.lang.size > 1 and site.data.conf.main.language_switch_lang_list.size > 1 %}
-        {% include default/nav/lang-switch.html -%}
+        {% include default/nav/lang-switch.liquid -%}
       {% endif %}
     </div>
     <br>
@@ -32,13 +32,13 @@
     <br>
     <div class="side-nav-buttons">
       <ul class="nav nav-pills nav-stacked">
-        {% include default/nav/navigation-buttons.html effect = site.data.conf.main.side_nav_buttons_hover_effect -%}
+        {% include default/nav/navigation-buttons.liquid effect = site.data.conf.main.side_nav_buttons_hover_effect -%}
       </ul>
     </div>
     <br>
     <br>
     {%- if site.data.conf.main.contacts and site.data.owner[lng].contacts.size > 0 -%}
-      {% include default/nav/contact-links.html -%}
+      {% include default/nav/contact-links.liquid -%}
     {% endif %}
     <hr id="toc-view-top">
     <div class="side-nav-footer" translate="no">
@@ -48,5 +48,5 @@
       {% endif -%}
     </div>
   </div>
-  {%- include default/nav/navigation-side-nav-bottom-buttons.html -%}
+  {%- include default/nav/navigation-side-nav-bottom-buttons.liquid -%}
 </nav>

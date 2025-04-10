@@ -28,18 +28,18 @@ layout: util/compress
 <!DOCTYPE html>
 <html lang="{{ lng_code }}">
   <head>
-    {% include default/header/header.html %}
-    {% include default/css-include.html %}
+    {% include default/header/header.liquid %}
+    {% include default/css-include.liquid %}
   </head>
 
   <body {{ default_dark }}>
     {% if color_scheme_enabled -%}
       <script src="{{ site.baseurl }}/assets/js/color-scheme-attr-init.js" data-mode="{{ site.data.conf.main.color_scheme_default_dark }}"></script>
     {%- endif %}
-    {% include default/nav/navigation-top-nav.html -%}
-    {% include default/nav/navigation-side-nav.html -%}
+    {% include default/nav/navigation-top-nav.liquid -%}
+    {% include default/nav/navigation-side-nav.liquid -%}
     {% if site.data.conf.posts.post_table_of_contents and page.layout == "post"-%}
-      {%- include post/table-of-contents.html -%}
+      {%- include post/table-of-contents.liquid -%}
     {%- endif -%}
     <div id="main-wrapper">
       <div class="main-container">
@@ -53,7 +53,7 @@ layout: util/compress
         {{ img_path_converter_out }}
         {%-comment-%} don't add anything here. If you want to add, check :last-child css selector for page bottom spacing. {%-endcomment-%}
       </div>
-      {%- include default/footer.html -%}
+      {%- include default/footer.liquid -%}
       {% if site.data.conf.main.scroll_back_to_top_button -%}
       <div class="scroll-to-top-container">
         <a id="scroll-to-top" href="#main-wrapper" role="button" aria-label="{{ site.data.lang[lng].navigation.scroll_back_to_top }}" class="hover-effect"><i class="fa fa-angle-up"></i></a>
@@ -62,9 +62,9 @@ layout: util/compress
     </div>
 
     {% if site.data.conf.main.search_enable -%}
-      {%- include default/search.html -%}
+      {%- include default/search.liquid -%}
     {%- endif %}
 
-    {% include default/scripts-include.html -%}
+    {% include default/scripts-include.liquid -%}
   </body>
 </html>
