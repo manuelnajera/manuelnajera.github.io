@@ -151,8 +151,8 @@ about:
    button_name: Acerca de
    email_title: correo electrónico
 
-# for links layout
-links:
+# for resources layout
+resources:
   title: Recursos
   button_name: Recursos
   link_text: Sitio web

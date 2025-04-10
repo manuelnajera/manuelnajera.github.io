@@ -33,7 +33,7 @@ This site is my personal portfolio where I share my projects, writeups, and tool
 ## 📚 Resources
 
 A curated list of tools and references I use regularly:  
-➡️ [Resources Page](https://manuelnajera.github.io/tabs/links.html)
+➡️ [Resources Page](https://manuelnajera.github.io/tabs/resources.html)
 
 ## 💖 Support My Work
 

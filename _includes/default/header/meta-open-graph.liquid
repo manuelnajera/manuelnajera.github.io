@@ -19,7 +19,7 @@
 <meta property="og:image" content="{{ meta_image }}">
 
 {%- if site.data.conf.main.meta.open_graph_locale %}
-  {%- include default/header/meta-hreflang.html pages=nil lng_pair=page.lng_pair layout=page.layout head=nil hreflang=nil open_graph=true -%}
+  {%- include default/header/meta-hreflang.liquid pages=nil lng_pair=page.lng_pair layout=page.layout head=nil hreflang=nil open_graph=true -%}
 {%- endif -%}
 
 {%- if page.layout == 'post' %}

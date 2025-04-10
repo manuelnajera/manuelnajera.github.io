@@ -65,7 +65,7 @@ layout: util/compress_js
 {% assign pages = site.html_pages | where_exp: "item", "item.layout == 'home'" %}
 {% if pages.size > 0 %} {% assign home_page_exist = true %} {% endif %}
 
-{% assign pages = site.html_pages | where_exp: "item", "item.layout == 'links'" %}
+{% assign pages = site.html_pages | where_exp: "item", "item.layout == 'resources'" %}
 {% if pages.size > 0 %} {% assign links_page_exist = true %} {% endif %}
 
 {% assign pages = site.html_pages | where_exp: "item", "item.layout == 'projects'" %}
@@ -76,8 +76,8 @@ layout: util/compress_js
   {% include_relative _js/home/heading-fade-in.js %}
 {% endif %}
 
-{%- if links_page_exist and site.data.conf.others.links.use_rows_as_link -%}
-  {% include_relative _js/links/open-url-in-new-page.js %}
+{%- if links_page_exist and site.data.conf.others.resources.use_rows_as_link -%}
+  {% include_relative _js/resources/open-url-in-new-page.js %}
 {%- endif %}
 
 {% if projects_page_exist %}

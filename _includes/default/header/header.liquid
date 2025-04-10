@@ -18,7 +18,7 @@
 {%- endif %}
 
 {%- if site.data.conf.main.google_font_load_in_head -%}
-  {%- include default/header/google-font-load.html %}
+  {%- include default/header/google-font-load.liquid %}
 {%- endif %}
 
 {% if site.data.owner[lng].google_analytics_id != empty and site.data.owner[lng].google_analytics_id != nil and jekyll.environment != site.data.conf.main.google.analytics.ignore -%}
@@ -44,12 +44,12 @@
 {%- endif %}
 
 {%- if site.data.conf.main.meta.mobile_app %}
-  {%- include default/header/meta-mobile-app.html %}
+  {%- include default/header/meta-mobile-app.liquid %}
 {%- endif %}
 
 {%- if page.search_engine_exclude != true and page.layout != "redirect" %}
   {%- if site.data.conf.main.meta.hreflang %}
-    {%- include default/header/meta-hreflang.html pages=nil lng_pair=page.lng_pair layout=page.layout head=nil hreflang=true open_graph=nil -%}
+    {%- include default/header/meta-hreflang.liquid pages=nil lng_pair=page.lng_pair layout=page.layout head=nil hreflang=true open_graph=nil -%}
   {%- endif -%}
 
   {%- include default/header/meta-common-data.liquid %}
@@ -62,14 +62,14 @@
   <meta name="robots" content="index, follow">
 
   {%- if site.data.conf.main.meta.twitter_card %}
-    {%- include default/header/meta-twitter.html %}
+    {%- include default/header/meta-twitter.liquid %}
   {%- endif -%}
 
   {%- if site.data.conf.main.meta.open_graph %}
-    {%- include default/header/meta-open-graph.html %}
+    {%- include default/header/meta-open-graph.liquid %}
   {%- endif %}
 
   {%- if site.data.conf.main.meta.schema_markup %}
-    {%- include default/header/meta-schema-markup.html %}
+    {%- include default/header/meta-schema-markup.liquid %}
   {%- endif %}
 {%- endif %}

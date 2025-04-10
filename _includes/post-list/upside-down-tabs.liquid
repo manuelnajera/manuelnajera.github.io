@@ -12,21 +12,21 @@
       <div id="tab1" class="tab-pane link-buttons">
         <ul class="nav nav-pills">
           {%- assign _group = lng_pages | where_exp: "item", "item.category.size > 0" | group_by: "category" -%}
-          {% include post-list/tab-links.html type='category' list = _group icon=site.data.conf.posts.post_query_tabs_item_icons.category -%}
+          {% include post-list/tab-links.liquid type='category' list = _group icon=site.data.conf.posts.post_query_tabs_item_icons.category -%}
         </ul>
       </div>
       {%comment-%} Tags {%-endcomment-%}
       <div id="tab2" class="tab-pane link-buttons">
         <ul class="nav nav-pills">
           {%- assign _group = lng_pages | where_exp: "item", "item.tags.size > 0" | group_by: "tags" -%}
-          {% include post-list/tab-links.html type='tags' list = _group icon=site.data.conf.posts.post_query_tabs_item_icons.tags -%}
+          {% include post-list/tab-links.liquid type='tags' list = _group icon=site.data.conf.posts.post_query_tabs_item_icons.tags -%}
         </ul>
       </div>
       {%comment-%} Years {%-endcomment-%}
       <div id="tab3" class="tab-pane link-buttons">
         <ul class="nav nav-pills">
           {%- assign _group = lng_pages | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: '%Y'" -%}
-          {% include post-list/tab-links.html type='year' list = _group icon=site.data.conf.posts.post_query_tabs_item_icons.year -%}
+          {% include post-list/tab-links.liquid type='year' list = _group icon=site.data.conf.posts.post_query_tabs_item_icons.year -%}
         </ul>
       </div>
       {%comment-%} your new tab

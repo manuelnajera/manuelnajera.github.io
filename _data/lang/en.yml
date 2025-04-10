@@ -153,8 +153,8 @@ about:
   button_name: About
   email_title: email
 
-# for links layout
-links:
+# for resources layout
+resources:
   title: Resources
   button_name: Resources
   link_text: Web site

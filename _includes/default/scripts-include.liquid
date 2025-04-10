@@ -112,7 +112,7 @@
     {% assign restore_page_content = true %}
   {%- endif %}
   {%- capture thumbnail_html%}
-    {%- include post-list/post-thumbnail-html.html
+    {%- include post-list/post-thumbnail-html.liquid
       url = '{url}'
       image = '{image}'
       max_width = '{max_width}'
@@ -162,7 +162,7 @@
 
 {%comment-%} Search {%-endcomment-%}
 {% if site.data.conf.main.search_enable -%}
-  {%- include default/search-scripts.html -%}
+  {%- include default/search-scripts.liquid -%}
 {% endif -%}
 
 {%comment-%} add disqus comment feature {%-endcomment-%}
@@ -170,7 +170,7 @@
   and site.data.owner[lng].comments.disqus.shortname != nil
   and site.data.owner[lng].comments.disqus.shortname != empty
 -%}
-  {%- include default/disqus-scripts.html -%}
+  {%- include default/disqus-scripts.liquid -%}
 {% endif -%}
 
 {%comment-%} add giscus comment feature {%-endcomment-%}
@@ -180,35 +180,35 @@
   and site.data.owner[lng].comments.giscus.category != nil and site.data.owner[lng].comments.giscus.category != empty
   and site.data.owner[lng].comments.giscus.category-id != nil and site.data.owner[lng].comments.giscus.category-id != empty
 -%}
-  {%- include default/giscus-scripts.html -%}
+  {%- include default/giscus-scripts.liquid -%}
 {% endif -%}
 
 {% if site.data.conf.main.cookie_consent.enable -%}
-  {%- include default/google-consent-init.html -%}
+  {%- include default/google-consent-init.liquid -%}
 {% endif -%}
 
 {% if site.data.owner[lng].google_analytics_id != empty and site.data.owner[lng].google_analytics_id != nil
   and jekyll.environment != site.data.conf.main.google.analytics.ignore
 -%}
-  {%- include default/google-analytics.html -%}
+  {%- include default/google-analytics.liquid -%}
 {% endif -%}
 
 {% if site.data.lang.size > 1 and site.data.conf.main.language_switch_lang_list.size > 1
   and site.data.conf.main.language_translation_offer_box
 -%}
   {%- assign language_translation_offer_box = true -%}
-  {%- include multi_lng/lang-offer-msg-box.html -%}
+  {%- include multi_lng/lang-offer-msg-box.liquid -%}
 {% endif -%}
 
 {% if site.data.conf.main.contact_form.enable and page.layout == 'about' -%}
-  {%- include default/google-contact-form-iframe.html -%}
+  {%- include default/google-contact-form-iframe.liquid -%}
 {% endif -%}
 
 {% if site.data.conf.main.cookie_consent.enable
   or language_translation_offer_box
   or site.data.conf.main.contact_form.enable
 -%}
-  {%- include default/sliding-msg-box.html -%}
+  {%- include default/sliding-msg-box.liquid -%}
 {% endif -%}
 
 {%- comment -%} iOS Safari Web App fix for open links inside app. (prevent opening in safari) {%- endcomment -%}

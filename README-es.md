@@ -33,7 +33,7 @@ Este es el código fuente de mi portafolio personal, creado con Jekyll y despleg
 ## 📚 Recursos
 
 Una lista curada de herramientas y referencias que uso frecuentemente:  
-➡️ [Página de Recursos](https://manuelnajera.github.io/tabs/links.html)
+➡️ [Página de Recursos](https://manuelnajera.github.io/tabs/resources.html)
 
 ## 💖 Apoya Mi Trabajo
 
