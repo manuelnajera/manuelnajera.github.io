@@ -13,7 +13,7 @@ name: "Manuel Nájera"
 # home page top header texts
 home:
   # you can also use $site_brand, $site_greetings, $site_welcome in line1 and line2 for replacing texts.
-  top_header_line1: "Cibserseguridad"
+  top_header_line1: "Ciberseguridad"
   # if commented, top header will be a single line
   top_header_line2: "x"
   top_header_line3: "Agentes IA"
