@@ -4,7 +4,7 @@ layout: home
 lng_pair: id_home
 
 # image for page specific usage
-img: ":home-heading.jpg"
+img: ":home-heading.png"
 # publish date (used for seo)
 # if not specified, site.time will be used.
 #date: 2022-03-03 12:32:00 +0000
@@ -40,6 +40,24 @@ img: ":home-heading.jpg"
 {%- comment -%} Please delete below and place your page content here {%- endcomment -%}
 
 {%- include util/auto-content-generator.liquid -%}
-{{ website_info_text_first }}
+## Explorando el futuro
 
-{{ website_info_text_second }}
+Soy Manuel Nájera, apasionado por la ciberseguridad y la inteligencia artificial, explorando la intersección entre la automatización inteligente y la defensa digital.
+
+Actualmente estoy investigando y experimentando con herramientas, agentes y protocolos como:
+- 🧠 **Agentes de IA basados en LLMs** (Goose, UI-TARS-desktop)
+- 🧩 **Frameworks de automatización** como **n8n**, **Google A2A** y **MCP**
+- 🛡️ **Prácticas de hacking ético**, mientras completo mi **Certificación en Hacking Ético de Cisco**
+
+¿Mi objetivo? Construir sistemas autónomos que sean seguros por diseño.
+
+---
+
+### 🧭 Lo que encontrarás aquí
+- Notas e ideas sobre mi camino en la IA y la ciberseguridad
+- Ideas de proyectos, experimentos y prototipos en desarrollo
+- Herramientas que descubro y pruebo en el camino
+
+Ya seas desarrollador, reclutador o simplemente tengas curiosidad, espero que encuentres algo valioso aquí.
+
+➡️ Puedes visitar mis [Proyectos](/es/tabs/projects/) o leer las últimas [Entradas del Blog](/es/tabs/blog/index.html).
