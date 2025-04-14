@@ -16,7 +16,7 @@ home:
   top_header_line1: "Seguro."
   # if commented, top header will be a single line
   top_header_line2: "Inteligente."
-  top_header_line3: "Autónomo"
+  top_header_line3: "Autónomo."
 
 # about page sub title
 about:
