@@ -40,6 +40,24 @@ img: ":home-heading.png"
 {%- comment -%} Please delete below and place your page content here {%- endcomment -%}
 
 {%- include util/auto-content-generator.liquid -%}
-{{ website_info_text_first }}
+## Exploring the Future
 
-{{ website_info_text_second }}
+I’m Manuel Nájera — cybersecurity and AI enthusiast exploring the intersection between intelligent automation and digital defense.
+
+I'm currently researching and experimenting with tools, agents, and protocols like:
+- 🧠 **LLM-based AI agents** (Goose, UI-TARS-desktop)
+- 🧩 **Automation frameworks** like **n8n**, **Google A2A**, and **MCP**
+- 🛡️ **Ethical hacking practices**, while completing my **Cisco Ethical Hacking Certificate**
+
+My goal? To build autonomous systems that are secure by design.
+
+---
+
+### 🧭 What you’ll find here
+- Notes and insights from my journey into AI and cybersecurity
+- Project ideas, experiments, and prototypes in progress
+- Tools I discover and test along the way
+
+Whether you’re a fellow builder, recruiter, or simply curious — I hope you find something valuable here.
+
+➡️ Check out my [Projects](/tabs/projects/) or recent [Blog posts](/tabs/blog/index.html).
