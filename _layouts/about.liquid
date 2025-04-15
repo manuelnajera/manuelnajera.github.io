@@ -12,8 +12,10 @@ layout: default
   <div class="row about-main">
     <div class="col-md-3 about-img">
       <img src="{{ page.img }}" alt="">
+      <br>
     </div>
     <div class="col-md-9 about-header">
+      <br>
       <h1 translate="no">{{ site.data.owner[lng].brand }}</h1>
       <div class="meta-container">
         {%- assign about_title = site.data.owner[lng].about.sub_title | replace: site.data.conf.main.sample_replace, site.data.lang[lng].constants.sample -%}
@@ -38,6 +40,7 @@ layout: default
           {% include default/nav/contact-links.liquid -%}
         {% endif -%}
       </div>
+      <br>
     </div>
   </div>
   <div class="row about-divider">
