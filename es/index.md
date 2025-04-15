@@ -45,7 +45,7 @@ img: ":home-heading.png"
 Soy Manuel Nájera, apasionado por la ciberseguridad y la inteligencia artificial, explorando la intersección entre la automatización inteligente y la defensa digital.
 
 Actualmente estoy investigando y experimentando con herramientas, agentes y protocolos como:
-- 🧠 **Agentes de IA basados en LLMs** (Goose, UI-TARS-desktop)
+- 🧠 **Agentes de IA basados en LLMs** como **Goose** y **UI-TARS-desktop**
 - 🧩 **Frameworks de automatización** como **n8n**, **Google A2A** y **MCP**
 - 🛡️ **Prácticas de hacking ético**, mientras completo mi **Certificación en Hacking Ético de Cisco**
 
@@ -53,9 +53,19 @@ Actualmente estoy investigando y experimentando con herramientas, agentes y prot
 
 ---
 
+### ⚡ Un vistazo rápido: otras herramientas que estoy explorando
+
+- **CUA**: Framework de contenedores virtuales de alto rendimiento para agentes IA.  
+- **Reaper**: Framework open-source para pruebas de seguridad, optimizado para IA.  
+- **Skyvern**: Automatiza tareas en sitios web usando LLMs y visión por computadora.  
+- **TARS**: Framework experimental para automatizar partes del pentesting con IA.
+
+---
+
 ### 🧭 Lo que encontrarás aquí
-- Notas e ideas sobre mi camino en la IA y la ciberseguridad
-- Ideas de proyectos, experimentos y prototipos en desarrollo
+
+- Notas e ideas sobre mi camino en la IA y la ciberseguridad  
+- Ideas de proyectos, experimentos y prototipos en desarrollo  
 - Herramientas que descubro y pruebo en el camino
 
 Ya seas desarrollador, reclutador o simplemente tengas curiosidad, espero que encuentres algo valioso aquí.

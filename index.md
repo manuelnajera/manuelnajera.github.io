@@ -45,17 +45,27 @@ img: ":home-heading.png"
 I’m Manuel Nájera — cybersecurity and AI enthusiast exploring the intersection between intelligent automation and digital defense.
 
 I'm currently researching and experimenting with tools, agents, and protocols like:
-- 🧠 **LLM-based AI agents** (Goose, UI-TARS-desktop)
-- 🧩 **Automation frameworks** like **n8n**, **Google A2A**, and **MCP**
+- 🧠 **LLM-based AI agents** such as **Goose** and **UI-TARS-desktop**
+- 🧩 **Automation frameworks** including **n8n**, **Google A2A**, and **MCP**
 - 🛡️ **Ethical hacking practices**, while completing my **Cisco Ethical Hacking Certificate**
 
 My goal? To build autonomous systems that are secure by design.
 
 ---
 
+### ⚡ Quick Look: More tools I'm exploring
+
+- **CUA**: High-speed virtual container framework for AI agents to control full operating systems at near-native performance.  
+- **Reaper**: AI-ready, open-source application security testing framework by Ghost Security.  
+- **Skyvern**: Automates browser-based workflows using LLMs and computer vision.  
+- **TARS**: Experimental framework to automate parts of penetration testing using AI agents.
+
+---
+
 ### 🧭 What you’ll find here
-- Notes and insights from my journey into AI and cybersecurity
-- Project ideas, experiments, and prototypes in progress
+
+- Notes and insights from my journey into AI and cybersecurity  
+- Project ideas, experiments, and prototypes in progress  
 - Tools I discover and test along the way
 
 Whether you’re a fellow builder, recruiter, or simply curious — I hope you find something valuable here.
