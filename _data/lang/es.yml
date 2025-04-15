@@ -134,7 +134,7 @@ post-list:
 
 # for home layout
 home:
-  title: Bienvenido
+  title: Explorando el futuro
   button_name: Inicio
   new_posts_title: Últimos hallazgos
   new_posts_show_more_button: Ver más...
