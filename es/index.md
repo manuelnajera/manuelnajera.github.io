@@ -70,4 +70,4 @@ Actualmente estoy investigando y experimentando con herramientas, agentes y prot
 
 Ya seas desarrollador, reclutador o simplemente tengas curiosidad, espero que encuentres algo valioso aquí.
 
-➡️ Puedes visitar mis [Proyectos](/es/tabs/projects/) o leer las últimas [Entradas del Blog](/es/tabs/blog/index.html).
+➡️ Puedes visitar mis [Proyectos](/es/tabs/projects.html) o leer las últimas [Entradas del Blog](/es/tabs/blog/index.html).
