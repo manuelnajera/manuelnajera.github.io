@@ -70,4 +70,4 @@ My goal? To build autonomous systems that are secure by design.
 
 Whether you’re a fellow builder, recruiter, or simply curious — I hope you find something valuable here.
 
-➡️ Check out my [Projects](/tabs/projects/) or recent [Blog posts](/tabs/blog/index.html).
+➡️ Check out my [Projects](/tabs/projects.html) or recent [Blog posts](/tabs/blog/index.html).
