@@ -4,16 +4,15 @@ title: "From Concrete to Code: My Journey into AI and Cybersecurity"
 author: Manuel Nájera
 category: personal journey
 tags: [career, transition, ai, cybersecurity, automation]
-date: 2025-04-13 08:11:06 +0900
-img: ":/2025-04-13/Ubuntu_cds_7_04.png"
+date: 2025-04-01 08:11:06 +0900
+img: ":/2025-04-01/Ubuntu_cds_7_04.png"
 ---
 
 I've always had a strong curiosity for technology. I was around 11 when my parents were able to buy our first computer. By 12, I was requesting free Ubuntu CDs through the ShipIt program and experimenting with Linux at home. I was the only one in my household who really knew how to use the internet and computers — and I loved it.
 
->![Ubuntu ShipIt CD – Wikimedia Commons](:/2025-04-13/Ubuntu_cds_7_04.png)
+>![Ubuntu ShipIt CD – Wikimedia Commons](:/2025-04-01/Ubuntu_cds_7_04.png)
 >{:data-align="center"}
 >*Ubuntu CD received through ShipIt. Image via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Ubuntu_cds_7_04.jpg). Licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).*
-
 
 
 Even though I later chose to study civil engineering (in part following advice about promising careers), my interest in computing never went away. Throughout my professional life, I kept finding ways to integrate technology into my work — whether automating with Excel macros, analyzing data, or building apps from scratch.

@@ -4,13 +4,13 @@ title: "Del concreto al código: mi camino hacia la IA y la ciberseguridad"
 author: Manuel Nájera
 category: camino personal
 tags: [carrera, transición, inteligencia-artificial, ciberseguridad, automatización]
-date: 2025-04-13 08:11:06 +0900
-img: ":/2025-04-13/Ubuntu_cds_7_04.png"
+date: 2025-04-01 08:11:06 +0900
+img: ":/2025-04-01/Ubuntu_cds_7_04.png"
 ---
 
 Siempre sentí una gran curiosidad por la tecnología. Tenía unos 11 años cuando mis papás pudieron comprar nuestra primera computadora. A los 12 ya estaba pidiendo una copia gratuita de Ubuntu con el programa ShipIt y probando Linux en casa. En ese entonces, yo era el único que realmente sabía usar la computadora y el internet en casa — y me encantaba.
 
->![Disco compacto de Ubuntu enviado por ShipIt – Wikimedia Commons](:/2025-04-13/Ubuntu_cds_7_04.png)
+>![Disco compacto de Ubuntu enviado por ShipIt – Wikimedia Commons](:/2025-04-01/Ubuntu_cds_7_04.png)
 >{:data-align="center"}
 >*CD de Ubuntu recibido por ShipIt. Imagen via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Ubuntu_cds_7_04.jpg). Bajo la licencia [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).*
 
