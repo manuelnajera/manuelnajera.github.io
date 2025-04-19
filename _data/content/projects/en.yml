@@ -5,174 +5,79 @@
 page_data:
   main:
     header: "Projects"
-    info: "Your Project page description."
+    info: "A curated collection of the projects I've built — from practical mobile apps developed during my engineering studies to recent experiments with AI tools, cybersecurity workflows, and intelligent automation. Many were born out of curiosity, some out of necessity — all taught me something."
     text_color: "white"
     # if you don't want to use background image, comment it. back_color will be activated.
-    img: ":projects-heading.jpg"
+    img: ":projects-heading.png"
     back_color: "lightblue"
 
   category:
-    - title: "Example"
-      type: id_example
-      color: "gray"
-    - title: "Picture"
-      type: id_picture
-      color: "#62b462"
-    - title: "Quote"
-      type: id_quote
-      color: "#2FD0ED"
+  - title: "Mobile App"
+    type: mobile_app
+    color: "#2962FF"    # Blue dark
+
+  - title: "Event Management"
+    type: event_mgmt
+    color: "#F9A825"    # Yellow dark / amber
+
+  - title: "University Project"
+    type: university_proj
+    color: "#388E3C"    # Deep green
+
+  - title: "Firebase Project"
+    type: firebase_proj
+    color: "#E64A19"    # Deep orange
+
+  - title: "AI Experiment"
+    type: ai_experiment
+    color: "#7B1FA2"    # Deep purple
+
+  - title: "Cybersecurity Tool"
+    type: cybersecurity_tool
+    color: "#00695C"    # Teal dark
+
+  - title: "Archived"
+    type: archive
+    color: "#424242"    # Gray dark
+
 
   list:
-    # example
-    - type: id_example
-      project_name: "Example Project"
-      project_excerpt: "Examples"
-      img: ":project1_thumb.jpg"
-      img_title: "img title1"
-      date: "2021-03-13"
+    - type: mobile_app
+      project_name: "Congreso AJEF App"
+      project_excerpt: "App for managing the 2017 AJEF National Congress — with Firebase, QR validation, and real-time staff access."
+      img: ":ajef_thumb.png"
+      img_title: "AJEF App Screenshot"
+      date: "2017-07-24"
       post: |
-        # Examples
+        # Congreso AJEF App
 
-        This is an example page to display markdown related styles for Mr. Green Jekyll Theme.
+        Developed for the XXXIV AJEF National Congress in Chiapas, Mexico (2017), this Android app was used to manage over 300 event participants.
 
-        ### Headings (centered)
+        ### 🔑 Features
+        - Firebase Authentication (Google, Facebook, email)
+        - QR-based access validation
+        - Realtime database to update user info
+        - Admin roles for staff
+        - User activity selection
+
+        ### 🧪 Tech stack
+        - Android Studio (Java)
+        - Firebase Realtime Database
+        - Firebase Auth
+        - Google Forms for pre-registration
+
+        [🧠 GitHub Repository](https://github.com/manuelnajera/congreso-ajef-app)
+
+        Although the app is no longer available on the Play Store (my account was removed due to inactivity), it still appears on third-party sites like <a href="https://apkcombo.com/congreso-ajef-2017/com.meb1.manuel.congresoajef/" rel="nofollow" target="_blank">APKCombo</a>. While <strong>it's not a trusted source for downloading APKs</strong> — since files may be modified — it serves as a visual reminder that the app was once officially published.
+
+        ![AJEF App listing on APKCombo](:ajef_apkcombo.png)
         {:data-align="center"}
-
-        # Heading 1
-
-        ## Heading 2
-
-        ### Heading 3
-
-        #### Heading 4
-
-        ##### Heading 5
-
-        ###### Heading 6
-
-        ***
-
-        ### Paragraphs
-
-        #### Paragraph
-
-        **William Shakespeare**, Let me not to the marriage of true minds
-        Admit impediments. Love is not love
-        Which alters when it alteration finds,
-        Or bends with the remover to remove.
-        O no, it is an ever-fixed mark
-        That looks on tempests and is never shaken;
-        It is the star to every wand'ring barque,
-        Whose worth's unknown, although his height be taken.
-        Love's not Time's fool, though rosy lips and cheeks
-        Within his bending sickle's compass come;
-        Love alters not with his brief hours and weeks,
-        But bears it out even to the edge of doom.
-        If this be error and upon me proved,
-        I never writ, nor no man ever loved.
-
-        #### Texts
-
-        Quoted text `Hello world`
-
-        Bold text **Hello world**
-
-        Italic text _Hello world_
-
-        kbd text <kbd>Hello world</kbd>
-
-        #### Blockquote
-
-        > **William Shakespeare**, Let me not to the marriage of true minds
-        Admit impediments. Love is not love
-        Which alters when it alteration finds,
-        Or bends with the remover to remove.
-        O no, it is an ever-fixed mark
-        That looks on tempests and is never shaken;
-        It is the star to every wand'ring barque,
-        Whose worth's unknown, although his height be taken.
-        Love's not Time's fool, though rosy lips and cheeks
-        Within his bending sickle's compass come;
-        Love alters not with his brief hours and weeks,
-        But bears it out even to the edge of doom.
-        If this be error and upon me proved,
-        I never writ, nor no man ever loved.
-
-        ### Link
-
-        This is [Mr. Green Jekyll Theme](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme), a simple theme built for [Jekyll](https://jekyllrb.com/).
-
-        ### Picture
-
-        ![such a lovely place](:projects-heading.jpg)
-
-        ### Picture (centered)
-
-        ![such a lovely place](:project1_thumb.jpg){:data-align="center"}
-
-        ### Lists
-
-        - Apple
-        - Banana
-        - Orange
-
-        1. Fruits
-            1. Apples
-                - Granny Smith
-                - Mutsu
-            1. Bananas
-                - Cavendish
-                - Red
-        1. Vegetables
-
-        ***
-
-        ### Tables
-
-        #### Small Table (centered)
-
-        | Fruits(not aligned) | Alignment (centered) | num (right align) |
-        | ------------------- | :------------------: | ----------------: |
-        | Apple               |       centered       |              9999 |
-        | Banana              |  centered long text  |               999 |
-        | Orange              |       centered       |                99 |
-        | Lemon               |       centered       |                 9 |
-        {:data-align="center"}
-
-        #### Wide Table (centered)
-
-        scroll enabled when page is narrow
-
-        | Fruits | num (left align) | num (right align) | num  | num  | num  |
-        | ------ | :--------------- | ----------------: | ---- | ---- | ---- |
-        | Apple  | 1111             |              1111 | 2222 | 3333 | 4444 |
-        | Banana | 111              |               111 | 222  | 333  | 444  |
-        | Orange | 11               |                11 | 22   | 33   | 44   |
-        | Lemon  | 1                |                 1 | 2    | 3    | 4    |
-        {:data-align="center"}
-
-        #### Wider Table
-
-        scroll enabled when page is narrow
-
-        | Fruits | num (left align) | num (right align) | num  | num  | num  | num  | num  | num  |
-        | ------ | :--------------- | ----------------: | ---- | ---- | ---- | ---- | ---- | ---- |
-        | Apple  | 1111             |              1111 | 2222 | 3333 | 4444 | 5555 | 6666 | 7777 |
-        | Banana | 111              |               111 | 222  | 333  | 444  | 555  | 666  | 777  |
-        | Orange | 11               |                11 | 22   | 33   | 44   | 55   | 66   | 77   |
-        | Lemon  | 1                |                 1 | 2    | 3    | 4    | 5    | 6    | 7    |
-
-        ### Code
-
-        #### Quote
-
-        ```python
-        for i in range(5, 10):
-          print(i)
-        ```
+        <em style="display: block; font-size: 0.9em; color: gray; margin-top: 0.3em;">
+        Screenshot from APKCombo showing my app as it was listed in 2017. Although no longer available officially, this serves as proof it was once live on the Play Store.
+        </em>
 
     # picture
-    - type: id_picture
+    - type: archive
       project_name: "Example Project"
       project_excerpt: "Picture"
       img: ":project2_thumb.jpg"
@@ -184,49 +89,5 @@ page_data:
 
         ![Image](:project2_thumb.jpg)
 
-    # quote
-    - type: id_quote
-      project_name: "Example Project"
-      project_excerpt: "William Shakespeare"
-      #img: ":project1_thumb.jpg"
-      #img_title: "img title3"
-      date: "2021-05-27"
-      post: |
-        Let me not to the marriage of true minds
-        Admit impediments. Love is not love
-        Which alters when it alteration finds,
-        Or bends with the remover to remove.
-        O no, it is an ever-fixed mark
-        That looks on tempests and is never shaken;
-        It is the star to every wand'ring barque,
-        Whose worth's unknown, although his height be taken.
-        Love's not Time's fool, though rosy lips and cheeks
-        Within his bending sickle's compass come;
-        Love alters not with his brief hours and weeks,
-        But bears it out even to the edge of doom.
-        If this be error and upon me proved,
-        I never writ, nor no man ever loved.
-    - type: id_quote
-      project_name: "Example Project"
-      project_excerpt: "Albert Einstein"
-      img: ":project2_thumb.jpg"
-      img_title: "img title4"
-      date: "2021-06-08"
-      post: |
-        Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.
-    - type: id_quote
-      project_name: "Example Project"
-      project_excerpt: "Mae West"
-      img: ":project1_thumb.jpg"
-      img_title: "img title5"
-      date: "2021-08-20"
-      post: |
-        You only live once, but if you do it right, once is enough.
-    - type: id_quote
-      project_name: "Example Project"
-      project_excerpt: "Mahatma Gandhi "
-      img: ":project2_thumb.jpg"
-      img_title: "img title6"
-      date: "2021-12-20"
-      post: |
-        Be the change that you wish to see in the world.
+ 
+
