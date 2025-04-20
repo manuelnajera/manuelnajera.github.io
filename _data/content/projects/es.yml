@@ -73,7 +73,7 @@ page_data:
       project_excerpt: "Plantilla de Word con macros que automatiza la inserción de múltiples imágenes desde una carpeta — con opción para eliminarlas después."
       img: ":image_organizer_thumb.png"
       img_title: "Captura de la macro en acción"
-      date: "2024-04-11"
+      date: "2024-03-11"
       tags: [vba, word, macro, automatización, office, docm, gestión-imágenes, productividad]
       post: |
         # Organizador de Imágenes para Word

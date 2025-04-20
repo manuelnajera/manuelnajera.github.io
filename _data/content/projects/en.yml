@@ -73,7 +73,7 @@ page_data:
       project_excerpt: "A macro-enabled Word template (.docm) that automates the insertion of multiple images from a folder into a document — with optional deletion after insertion."
       img: ":image_organizer_thumb.png"
       img_title: "Screenshot of the macro running"
-      date: "2024-04-11"
+      date: "2024-03-11"
       tags: [vba, word, macro, automation, office, docm, image-management, productivity]
       post: |
         # Image Organizer for Word
