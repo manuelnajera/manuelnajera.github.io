@@ -12,34 +12,25 @@ page_data:
     back_color: "lightblue"
 
   category:
-  - title: "Mobile App"
-    type: mobile_app
-    color: "#2962FF"    # Blue dark
+    - title: "Mobile App"
+      type: mobile_app
+      color: "#2962FF"    # Blue dark
 
-  - title: "Event Management"
-    type: event_mgmt
-    color: "#F9A825"    # Yellow dark / amber
+    - title: "AI Experiment"
+      type: ai_experiment
+      color: "#7B1FA2"    # Deep purple
 
-  - title: "University Project"
-    type: university_proj
-    color: "#388E3C"    # Deep green
+    - title: "Cybersecurity Tool"
+      type: cybersecurity_tool
+      color: "#00695C"    # Teal dark
 
-  - title: "Firebase Project"
-    type: firebase_proj
-    color: "#E64A19"    # Deep orange
+    - title: "Archived"
+      type: archive
+      color: "#424242"    # Gray dark
 
-  - title: "AI Experiment"
-    type: ai_experiment
-    color: "#7B1FA2"    # Deep purple
-
-  - title: "Cybersecurity Tool"
-    type: cybersecurity_tool
-    color: "#00695C"    # Teal dark
-
-  - title: "Archived"
-    type: archive
-    color: "#424242"    # Gray dark
-
+    - title: "Document Automation"
+      type: document_tool
+      color: "#5C6BC0"    # Indigo dark
 
   list:
     - type: mobile_app
@@ -48,6 +39,7 @@ page_data:
       img: ":ajef_thumb.png"
       img_title: "AJEF App Screenshot"
       date: "2017-07-24"
+      tags: [android, firebase, realtime-db, qr-code, youth-event, mobile, archive, firebase-auth, conference, volunteer-project]
       post: |
         # Congreso AJEF App
 
@@ -76,18 +68,37 @@ page_data:
         Screenshot from APKCombo showing my app as it was listed in 2017. Although no longer available officially, this serves as proof it was once live on the Play Store.
         </em>
 
-    # picture
-    - type: archive
-      project_name: "Example Project"
-      project_excerpt: "Picture"
-      img: ":project2_thumb.jpg"
-      img_title: "img title2"
-      date: "2021-04-23"
+    - type: document_tool
+      project_name: "Image Organizer for Word"
+      project_excerpt: "A macro-enabled Word template (.docm) that automates the insertion of multiple images from a folder into a document — with optional deletion after insertion."
+      img: ":image_organizer_thumb.png"
+      img_title: "Screenshot of the macro running"
+      date: "2024-04-11"
+      tags: [vba, word, macro, automation, office, docm, image-management, productivity]
       post: |
-        # Title
-        This is project content.
+        # Image Organizer for Word
 
-        ![Image](:project2_thumb.jpg)
+        This project is a `.docm` Word template with built-in macros that automate the process of inserting images from a selected folder directly into a Word document. After insertion, the images can optionally be deleted to streamline workflows.
 
- 
+        ### ✨ Features
+        - Fully automatic image insertion from a selected folder
+        - Deletes images after insertion (optional)
+        - Clean, reusable document template
+        - Available in **English and Spanish**
+        - Open-source and customizable
+
+        ### 🧪 Technologies used
+        - Microsoft Word (VBA macros)
+        - Visual Basic for Applications (VBA)
+        - Windows environment
+
+        ### 🔗 GitHub Repository
+        [View on GitHub](https://github.com/manuelnajera/image-organizer-word)
+
+        ![Screenshot of the macro running](:image_organizer-en.gif)
+
+        *Screenshot of the macro code that automates image insertion in Word.*
+
+
+    
 

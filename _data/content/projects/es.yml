@@ -12,42 +12,34 @@ page_data:
     back_color: "lightblue"
 
   category:
-  - title: "App Móvil"
-    type: app_movil
-    color: "#2962FF"
+    - title: "App Móvil"
+      type: mobile_app
+      color: "#2962FF"  # Azul oscuro
 
-  - title: "Gestión de Eventos"
-    type: gestion_eventos
-    color: "#F9A825"
+    - title: "Experimento con IA"
+      type: ai_experiment
+      color: "#7B1FA2"  # Púrpura oscuro
 
-  - title: "Proyecto Universitario"
-    type: proyecto_universidad
-    color: "#388E3C"
+    - title: "Herramienta de Ciberseguridad"
+      type: cybersecurity_tool
+      color: "#00695C"  # Verde azulado oscuro
 
-  - title: "Proyecto Firebase"
-    type: proyecto_firebase
-    color: "#E64A19"
+    - title: "Archivado"
+      type: archive
+      color: "#424242"  # Gris oscuro
 
-  - title: "Experimento con IA"
-    type: experimento_ia
-    color: "#7B1FA2"
-
-  - title: "Herramienta de Ciberseguridad"
-    type: herramienta_ciberseguridad
-    color: "#00695C"
-
-  - title: "Archivado"
-    type: archivo
-    color: "#424242"
-
+    - title: "Automatización de Documentos"
+      type: document_tool
+      color: "#5C6BC0"    # Indigo dark
 
   list:
-    - type: app_movil
+    - type: mobile_app
       project_name: "App Congreso AJEF"
       project_excerpt: "Aplicación Android para gestionar el Congreso Nacional AJEF 2017 — con Firebase, validación QR y acceso en tiempo real para el staff."
       img: ":ajef_thumb.png"
       img_title: "Captura de la App AJEF"
       date: "2017-07-24"
+      tags: [android, firebase, realtime-db, codigo-qr, evento-juvenil, app-movil, archivado, firebase-auth, congreso, proyecto-voluntario]
       post: |
         # App Congreso AJEF
 
@@ -76,17 +68,36 @@ page_data:
         Captura de APKCombo mostrando mi app publicada en 2017. Aunque ya no está disponible oficialmente, esta vista es evidencia de que estuvo en la Play Store.
         </em>
 
-    # picture
-    - type: archivo
-      project_name: "Example Project"
-      project_excerpt: "Picture"
-      img: ":project2_thumb.jpg"
-      img_title: "img title2"
-      date: "2021-04-23"
+    - type: document_tool
+      project_name: "Organizador de Imágenes para Word"
+      project_excerpt: "Plantilla de Word con macros que automatiza la inserción de múltiples imágenes desde una carpeta — con opción para eliminarlas después."
+      img: ":image_organizer_thumb.png"
+      img_title: "Captura de la macro en acción"
+      date: "2024-04-11"
+      tags: [vba, word, macro, automatización, office, docm, gestión-imágenes, productividad]
       post: |
-        # Title
-        This is project content.
+        # Organizador de Imágenes para Word
 
-        ![Image](:project2_thumb.jpg)
+        Este proyecto es una plantilla de Word (`.docm`) con macros integradas que automatizan el proceso de insertar imágenes desde una carpeta seleccionada directamente en un documento. Luego de insertarlas, las imágenes pueden eliminarse automáticamente (opcional).
 
-   
+        ### ✨ Funcionalidades
+        - Inserción automática de imágenes desde una carpeta
+        - Eliminación automática de las imágenes tras insertarlas (opcional)
+        - Plantilla limpia y reutilizable
+        - Disponible en **español e inglés**
+        - Código abierto y personalizable
+
+        ### 🧪 Tecnologías usadas
+        - Microsoft Word (plantilla con macros)
+        - Visual Basic para Aplicaciones (VBA)
+        - Entorno Windows
+
+        ### 🔗 Repositorio en GitHub
+        [Ver en GitHub](https://github.com/manuelnajera/image-organizer-word)
+
+        ![Captura de la macro en acción](:image_organizer-es.gif)
+
+        *Captura del código que automatiza la inserción de imágenes en Word.*
+      
+
+      
