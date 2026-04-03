@@ -18,12 +18,13 @@ export default function GridCanvas() {
   useEffect(() => {
     const mount = mountRef.current
     if (!mount) return
-    if (window.innerWidth < 768) return
 
-    // Renderer
+    const isMobile = window.innerWidth < 768
+
+    // Renderer — cap pixelRatio at 1.5 on mobile to save GPU
     const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true })
     renderer.setSize(mount.clientWidth, mount.clientHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2))
     renderer.setClearColor(0x000000, 0)
     mount.appendChild(renderer.domElement)
 
@@ -64,7 +65,7 @@ export default function GridCanvas() {
     const material = new THREE.LineBasicMaterial({
       color: 0x3b82f6,
       transparent: true,
-      opacity: 0.15,
+      opacity: isMobile ? 0.28 : 0.15,
     })
 
     const grid = new THREE.LineSegments(geometry, material)
@@ -80,7 +81,13 @@ export default function GridCanvas() {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
     }
+    const onTouchMove = (e) => {
+      const t = e.touches[0]
+      mouse.x = (t.clientX / window.innerWidth) * 2 - 1
+      mouse.y = -(t.clientY / window.innerHeight) * 2 + 1
+    }
     window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
 
     // Scroll: fade canvas out as user scrolls past hero
     ScrollTrigger.create({
@@ -144,6 +151,7 @@ export default function GridCanvas() {
       running = false
       cancelAnimationFrame(rafId)
       window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', onVisibility)
       geometry.dispose()
@@ -158,7 +166,7 @@ export default function GridCanvas() {
   return (
     <div
       ref={mountRef}
-      className="absolute inset-0 z-0 hidden md:block"
+      className="absolute inset-0 z-0"
       aria-hidden="true"
     />
   )

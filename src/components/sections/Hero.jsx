@@ -66,7 +66,7 @@ export default function Hero() {
       <div className="relative z-10 text-center px-6 max-w-5xl">
         <h1
           ref={nameRef}
-          className="font-display font-bold text-[clamp(52px,10vw,108px)] text-text leading-none tracking-tight"
+          className="font-display font-bold text-[clamp(38px,7vw,80px)] text-text leading-none tracking-tight"
           style={{ opacity: 0 }}
         >
           Manuel Nájera
