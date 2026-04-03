@@ -1,100 +1,75 @@
-# 🧠 Manuel Nájera – Personal Portfolio Website
+# Manuel Nájera — Portfolio
 
-[![GitHub issues](https://img.shields.io/github/issues/manuelnajera/manuelnajera.github.io)](https://github.com/manuelnajera/manuelnajera.github.io/issues)
-[![GitHub license](https://img.shields.io/github/license/manuelnajera/manuelnajera.github.io)](https://github.com/manuelnajera/manuelnajera.github.io/blob/main/LICENSE.txt)
-[![GitHub Sponsors](https://shields.io/badge/Github%20Sponsors-Support%20me-blue?logo=GitHub+Sponsors)](https://github.com/sponsors/manuelnajera "Support me on GitHub Sponsors")
+[![Deploy](https://github.com/manuelnajera/manuelnajera.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/manuelnajera/manuelnajera.github.io/actions/workflows/deploy.yml)
+[![License](https://img.shields.io/github/license/manuelnajera/manuelnajera.github.io)](LICENSE.txt)
 
-> 🚀 Multilingual personal website built with [Jekyll](https://jekyllrb.com/), deployed via [GitHub Pages](https://pages.github.com/), and powered by the [Mr. Green Theme](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme).
+[English](#) | [Español](README-es.md)
 
-Hi! I’m Manuel Nájera, a cybersecurity specialist, software developer, ethical hacker in training, and 3D modeling enthusiast.  
-This site is my personal portfolio where I share my projects, writeups, and tools I’ve built or found helpful.
+Personal portfolio for Manuel Nájera — civil engineer turned full-stack developer, based in Tuxtla Gutiérrez, Chiapas, Mexico.
 
-🌐 [English](#readme) | [Español](https://github.com/manuelnajera/manuelnajera.github.io/blob/main/README-es.md#readme)
+**Live:** [manuelnajera.github.io](https://manuelnajera.github.io)
+
 ---
 
-<!-- outline-start -->
-  This is the source code for my personal portfolio website, built using Jekyll and deployed with GitHub Pages. It showcases my projects, background, and areas of expertise in cybersecurity, LLMs, Agentic AI, 3D modeling, and web development.
+## Stack
 
-## 🔗 Live Website
+- **React 18 + Vite 5** — SPA, fast builds
+- **Tailwind CSS v3** — utility-first styling with custom engineering palette
+- **Three.js** — WebGL wireframe terrain background (500-point grid, mouse deformation, scroll fade)
+- **GSAP 3 + ScrollTrigger** — section entry animations, timeline draw, scroll effects
+- **Framer Motion** — page transitions between `/` (EN) and `/es`
+- **react-i18next** — English and Spanish, URL-based language detection
+- **GitHub Actions** → **GitHub Pages** — push to `main` deploys automatically
 
-👉 Visit it here: **[https://manuelnajera.github.io](https://manuelnajera.github.io)**
+## Local development
 
-<!-- outline-end -->
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # production build → /dist
+npm run preview    # preview production build
+```
 
-## ✨ Features
+## Structure
 
-- 🌐 **Multilingual**: English and Spanish support
-- 🌗 **Dark/Light mode** switcher
-- 📦 **3D and LiDAR projects showcase**
-- 🛡️ **Cybersecurity, AI & Ethical Hacking blog**
-- 📱 Fully **responsive layout**
-- 🔎 Site search, comments, analytics, and more
+```
+src/
+├── components/
+│   ├── layout/        Header, Footer
+│   ├── sections/      Hero, About, Projects, Skills, Contact
+│   ├── three/         GridCanvas (Three.js background)
+│   └── ui/            Tag, Timeline, ProjectCard
+├── hooks/             useScrollAnimation (GSAP ScrollTrigger wrapper)
+├── i18n/              react-i18next config
+├── styles/            globals.css (CSS vars, scanlines, animations)
+├── App.jsx
+└── main.jsx
 
-## 📚 Resources
+public/
+├── locales/
+│   ├── en/translation.json
+│   └── es/translation.json
+└── favicon.svg
+```
 
-A curated list of tools and references I use regularly:  
-➡️ [Resources Page](https://manuelnajera.github.io/tabs/resources.html)
+## Sections
 
-## 💖 Support My Work
+| # | Section | Description |
+|---|---------|-------------|
+| 01 | Hero | Full-viewport, Three.js grid, typewriter role cycling |
+| 02 | About | Story + animated timeline (civil engineering → software) |
+| 03 | Projects | DeltaVis + InsumosDentalesChiapas — production systems |
+| 04 | Stack | Three rows of skill tags with scroll-entry glow |
+| 05 | Contact | LinkedIn + email CTAs |
 
-I'm an independent AI researcher focused on the intersection of **cybersecurity** and **LLM-based agents**.  
-If you find this project useful or believe in my work, consider supporting me:
+## Deployment
 
-👉 [Become a GitHub Sponsor](https://github.com/sponsors/manuelnajera)
+Push to `main`. The `deploy.yml` workflow builds with Vite and deploys `dist/` to the `gh-pages` branch via `peaceiris/actions-gh-pages`.
 
-## 🤝 Contributing
-
-Got ideas or spotted something that could be improved?  
-Feel free to open an issue or send a pull request. Contributions are always welcome! 🙌
-
-## Credits
-This website is built using the [Mr. Green Jekyll Theme](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme) by Mr.Green. Full credit and license info below.
-
-- [Jekyll](https://jekyllrb.com/) is a static site generator. It takes text written in your favorite markup language and uses layouts to create a static website. You can tweak the site’s look and feel, URLs, the data displayed on the page, and more. It is a wonderful project which is maintained by volunteers.
-
-- [GitHub Pages](https://pages.github.com/) Hosted directly from your GitHub repository. Just push the changes and the site will be automatically generated.
-
-Please note that this theme is under the MIT license, and I have made site-specific customizations.
+GitHub Pages SPA routing: `/es` is handled by `public/404.html` redirect → `index.html` script restores the path.
 
 ## License
 
-### Code
-
-This site uses parts of the theme created by Mr. Green’s Workshop, licensed under the MIT License.  
-All custom code specific to this site, including modifications and new features such as 3D visualizations with Three.js, is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-As stated in the [MIT license](https://github.com/manuelnajera/manuelnajera.github.io/blob/main/LICENSE.txt), you may use this theme anywhere, as long as you include the license and the copyright notice.
-
-This site also uses third-party libraries that are subject to their own licenses:
-
-- **Three.js** is distributed under the [MIT License](https://github.com/mrdoob/three.js/blob/dev/LICENSE).
-- Other libraries used are listed in the section [Other Licenses](#other-licenses).
-
-`Copyright (c) 2022 Mr. Green's Workshop https://www.MrGreensWorkshop.com`  
-`Copyright (c) 2024 Manuel Nájera https://manuelnajera.github.io`
-
-### Content
-
-All original content (including blog posts, writeups, and portfolio material) is licensed under the  
-[Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
-
-You are free to:
-- Share — copy and redistribute the material in any medium or format
-- Adapt — remix, transform, and build upon the material for any purpose, even commercially  
-...as long as you give appropriate credit.
-
-## Other Licenses
-
-Mr. Green Jekyll Theme incorporates libraries written below. Without these libraries, I couldn't make this project possible.
-
-| Library                              | file |
-| :----------------------------------- | ---- |
-| [jQuery v3.6.0](https://github.com/jquery/jquery/tree/3.6.0), Copyright [OpenJS Foundation](https://openjsf.org) and other contributors. jQuery is distributed under the terms of the MIT License. | [jquery-3.6.0.min.js](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/js/jquery-3.6.0.min.js) |
-| [Bootstrap v3.3.7](https://github.com/twbs/bootstrap/tree/v3.3.7), Copyright (c) 2011-2016 Twitter, Inc. Bootstrap is distributed under the terms of the MIT License. | [bootstrap.min.js](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/js/bootstrap.min.js), [bootstrap.min.css](assets/css/bootstrap.min.css) |
-| [Bootstrap Table of Contents v0.4.1](https://github.com/afeld/bootstrap-toc/tree/v0.4.1), Copyright (c) 2015 Aidan Feldman. Bootstrap Table of Contents is distributed under the terms of the MIT License. | [bootstrap-toc.min.js](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/js/bootstrap-toc.min.js), [bootstrap-toc.min.css](assets/css/bootstrap-toc.min.css) |
-| [Font Awesome v4.7.0](https://github.com/FortAwesome/Font-Awesome/tree/v4.7.0), Copyright (c) 2017 Dave Gandy. The Font Awesome font is distributed under the terms of the [SIL OFL 1.1](http://scripts.sil.org/OFL). Font Awesome CSS, LESS, and Sass files are distributed under the terms of the [MIT License](https://opensource.org/licenses/mit-license.html). | [font-awesome.min.css](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/css/font-awesome.min.css), [FontAwesome](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/fonts/) |
-| [Lozad.js v1.16.0](https://github.com/ApoorvSaxena/lozad.js/tree/v1.16.0), Copyright (c) 2017 Apoorv Saxena. Lozad.js is distributed under the terms of the MIT License. | [lozad.min.js](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/js/lozad.min.js) |
-| [Magnific Popup v1.1.0](https://github.com/dimsemenov/Magnific-Popup/tree/1.1.0), Copyright (c) 2014-2016 Dmitry Semenov, http://dimsemenov.com. Magnific Popup is distributed under the terms of the MIT License. | [jquery.magnific-popup.min.js](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/js/jquery.magnific-popup.min.js), [magnific-popup.css](assets/css/magnific-popup.css) |
-| [Simple-Jekyll-Search v1.9.2](https://github.com/christian-fei/Simple-Jekyll-Search/tree/v1.9.2), Copyright (c) 2015 Christian Fei. Simple-Jekyll-Search is distributed under the terms of the MIT License. | [simple-jekyll-search-1.9.2.min.js](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/assets/js/simple-jekyll-search-1.9.2.min.js) |
-| [Compress HTML in Jekyll v3.1.0](https://github.com/penibelst/jekyll-compress-html/tree/v3.1.0), Copyright (c) 2014 Anatol Broder. Compress HTML in Jekyll is distributed under the terms of the MIT License. | [compress.liquid](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme/blob/main/_layouts/util/compress.liquid) |
-
+Code: [MIT](LICENSE.txt)  
+Content: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
+Copyright (c) 2026 Manuel Nájera
