@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "stack": "Stack",
+    "contact": "Contact"
+  },
+  "hero": {
+    "roles": ["Civil Engineer", "Full-Stack Developer", "3D Systems Builder", "Infrastructure + Software"],
+    "tagline": "I build software for the physical world.",
+    "scroll": "↓ Scroll"
+  },
+  "about": {
+    "label": "02 / About",
+    "pullQuote": "Civil engineer who crossed into software.",
+    "bio": "I spent years building highway infrastructure — road asset management, construction supervision, maintenance coordination. Then I started automating the paperwork with VBA, then building the tools the industry actually needed. Two years ago I crossed fully into software. I now build production systems from the ground up: a full-stack commerce platform with a real payment terminal, and a browser-based 3D construction monitoring platform that runs the Kabsch alignment algorithm from scratch. DeltaVis is not a pivot away from engineering — it is the extension of it.",
+    "timeline": [
+      {
+        "period": "2015–2017",
+        "role": "Electrical Engineering Assistant",
+        "description": "AutoCAD drafting, cost estimation, field support"
+      },
+      {
+        "period": "2018–2022",
+        "role": "Civil Engineer — Highway Infrastructure",
+        "description": "Road asset management, maintenance coordination, VBA automation"
+      },
+      {
+        "period": "2022–present",
+        "role": "Remote Data Analyst, TELUS International",
+        "description": "Data quality and analysis for international clients"
+      },
+      {
+        "period": "2025–present",
+        "role": "Freelance Full-Stack Developer",
+        "description": "Dental commerce POS + government literacy program dashboards"
+      },
+      {
+        "period": "2026–present",
+        "role": "Founder, DeltaVis",
+        "description": "3D construction monitoring platform for civil engineers"
+      }
+    ]
+  },
+  "projects": {
+    "label": "03 / Projects",
+    "subheader": "Production systems. Not demos.",
+    "featured": "FEATURED",
+    "live": "Live site ↗",
+    "deltavis": {
+      "title": "DeltaVis",
+      "url": "deltavis.app",
+      "oneliner": "3D construction monitoring platform for civil engineers.",
+      "description": "Load two 3D scans of the same construction site at different dates, align them mathematically using the Kabsch algorithm — Jacobi SVD implemented from scratch, no linear algebra library — measure volumetric differences, and export a professional PDF report. Built for the workflows civil engineers and drone operators actually use.",
+      "tags": ["React", "Three.js", "Firebase", "Claude API", "GitHub Actions"]
+    },
+    "insumos": {
+      "title": "InsumosDentales Chiapas",
+      "url": "insumosdentaleschiapas.com.mx",
+      "oneliner": "Full-stack commerce + physical POS for a dental distributor.",
+      "description": "Dual-channel system: online store with MercadoPago Checkout Pro and a physical POS running the MercadoPago Point Smart 2 terminal. FCM push notifications, loyalty rewards with race condition-safe Firestore transactions, multi-role access, and a complete order fulfillment workflow.",
+      "tags": ["React", "Firebase", "MercadoPago", "Cloud Functions", "Cloudinary", "FCM"]
+    }
+  },
+  "skills": {
+    "label": "04 / Stack",
+    "rows": [
+      {
+        "category": "Frontend & 3D",
+        "items": ["React 18", "Vite", "Tailwind CSS", "Three.js", "Zustand", "PWA", "jsPDF"]
+      },
+      {
+        "category": "Backend & Infrastructure",
+        "items": ["Firebase Auth", "Firestore", "Cloud Storage", "Cloud Functions", "Firebase Hosting", "GitHub Actions", "MercadoPago", "Cloudinary", "FCM"]
+      },
+      {
+        "category": "Domain & Tools",
+        "items": ["Civil Engineering", "Photogrammetry", "Drone (UAV)", "LiDAR", "AutoCAD", "Excel / VBA", "Python", "SQL"]
+      }
+    ]
+  },
+  "contact": {
+    "label": "05 / Contact",
+    "headline": "Open to remote full-stack roles and freelance projects.",
+    "linkedin": "View LinkedIn ↗",
+    "email": "Send email ↗",
+    "built": "Built with React + Three.js · Deployed on GitHub Pages",
+    "copyright": "© 2026 Manuel Nájera"
+  }
+}
