@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
-import GridCanvas from '../three/GridCanvas.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
 
 export default function Hero() {
   const { t } = useTranslation()
+  const { theme } = useTheme()
   const roles = t('hero.roles', { returnObjects: true })
 
   const [roleIndex, setRoleIndex] = useState(0)
@@ -55,26 +56,28 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden scanlines">
-      <GridCanvas />
 
       {/* Coordinate label — Tuxtla Gutiérrez, Chiapas */}
       <div className="absolute bottom-8 left-6 font-mono text-xs text-muted/60 z-10 hidden sm:block">
         16.7516° N / 93.1152° W
       </div>
 
-      {/* Center content */}
+      {/* Center content — z-10 keeps it clearly above the fixed canvas */}
       <div className="relative z-10 text-center px-6 max-w-5xl">
         <h1
           ref={nameRef}
-          className="font-display font-bold text-[clamp(38px,7vw,80px)] text-text leading-none tracking-tight"
-          style={{ opacity: 0 }}
+          className="font-display font-bold text-[clamp(44px,8vw,96px)] leading-none tracking-tight"
+          style={{ opacity: 0, color: 'rgb(var(--color-text))' }}
         >
           Manuel Nájera
         </h1>
 
-        {/* Typewriter row */}
-        <div className="mt-6 h-9 flex items-center justify-center">
-          <span className="font-mono text-lg sm:text-xl text-accent">
+        {/* Typewriter row — accent blue in dark mode, text color in light mode */}
+        <div className="mt-8 h-10 flex items-center justify-center">
+          <span
+            className="font-mono text-xl sm:text-2xl"
+            style={{ color: theme === 'light' ? 'rgb(var(--color-text))' : 'rgb(var(--color-accent))' }}
+          >
             {displayed}
             <span className="cursor-blink ml-0.5">|</span>
           </span>
@@ -82,8 +85,8 @@ export default function Hero() {
 
         <p
           ref={taglineRef}
-          className="mt-4 font-body text-base text-muted max-w-sm mx-auto"
-          style={{ opacity: 0 }}
+          className="mt-5 font-body text-base sm:text-lg max-w-sm mx-auto"
+          style={{ opacity: 0, color: 'rgb(var(--color-muted))' }}
         >
           {t('hero.tagline')}
         </p>

@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ThemeProvider } from './context/ThemeContext.jsx'
+import BackgroundCanvas from './components/three/BackgroundCanvas.jsx'
 import Header from './components/layout/Header.jsx'
 import Footer from './components/layout/Footer.jsx'
 import Hero from './components/sections/Hero.jsx'
@@ -36,12 +38,16 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AnimatedRoutes />} />
-        <Route path="/es" element={<AnimatedRoutes />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      {/* Canvas lives outside the router — persists across /en ↔ /es transitions */}
+      <BackgroundCanvas />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AnimatedRoutes />} />
+          <Route path="/es" element={<AnimatedRoutes />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }

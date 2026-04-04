@@ -2,31 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Color tokens — space-separated RGB for Tailwind's rgb(... / alpha) ── */
 :root {
-  --bg: #050508;
-  --surface: #0d0d14;
-  --border: #1a1a28;
-  --accent: #3b82f6;
-  --accent-warm: #f59e0b;
-  --text: #e2e8f0;
-  --muted: #475569;
-  --mono: #94a3b8;
+  --color-bg:           5 5 8;
+  --color-surface:      13 13 20;
+  --color-border:       26 26 40;
+  --color-accent:       59 130 246;
+  --color-accent-warm:  245 158 11;
+  --color-text:         226 232 240;
+  --color-muted:        71 85 105;
+  --color-mono:         148 163 184;
+
+  /* Comma-separated for rgba() in plain CSS */
+  --bg-rgb: 5, 5, 8;
 }
 
+[data-theme="light"] {
+  --color-bg:           241 245 249;
+  --color-surface:      226 232 240;
+  --color-border:       203 213 225;
+  --color-accent:       37 99 235;
+  --color-accent-warm:  217 119 6;
+  --color-text:         15 23 42;
+  --color-muted:        100 116 139;
+  --color-mono:         71 85 105;
+
+  --bg-rgb: 241, 245, 249;
+}
+
+/* ─── Theme transitions — inside @layer base so Tailwind utilities override ── */
+@layer base {
+  *, *::before, *::after {
+    transition-property: background-color, color, border-color, fill, stroke;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+  }
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg);
-  color: var(--text);
+  /* Slightly larger base — scales all rem values proportionally */
+  font-size: 17px;
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
 }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  /* Transparent so the fixed canvas is visible behind body content */
+  background-color: transparent;
+  color: rgb(var(--color-text));
   overflow-x: hidden;
 }
 
-/* Scanline texture — CSS only, no image */
+/* ─── Stack: canvas z:0 → sections z:1 → header z:50 ───────────────────── */
+main > section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero transparent — canvas fully visible through it */
+main > section:first-child {
+  background-color: transparent;
+}
+
+/* Other sections: 65% opaque — enough for readability, lets 35% of canvas through */
+#about,
+#projects,
+#stack,
+#contact {
+  background-color: rgba(var(--bg-rgb), 0.65);
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(var(--bg-rgb), 0.90);
+}
+
+/* ─── Light mode: ensure hero text reads against the light background ───── */
+/* The `text-text` Tailwind class uses CSS vars correctly, but add explicit
+   color on the hero content wrapper as a safety net */
+[data-theme="light"] main > section:first-child {
+  color: rgb(var(--color-text));
+}
+
+/* ─── Scanline texture — CSS only, no image ─────────────────────────────── */
 .scanlines::after {
   content: '';
   position: absolute;
@@ -35,14 +97,14 @@ body {
     to bottom,
     transparent 0px,
     transparent 3px,
-    rgba(0, 0, 0, 0.07) 3px,
-    rgba(0, 0, 0, 0.07) 4px
+    rgba(0, 0, 0, 0.06) 3px,
+    rgba(0, 0, 0, 0.06) 4px
   );
   pointer-events: none;
   z-index: 2;
 }
 
-/* Cursor blink for typewriter */
+/* ─── Cursor blink for typewriter ───────────────────────────────────────── */
 @keyframes blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -52,7 +114,7 @@ body {
   animation: blink 1s step-end infinite;
 }
 
-/* Scroll indicator bounce */
+/* ─── Scroll indicator bounce ────────────────────────────────────────────── */
 @keyframes bounce-y {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }

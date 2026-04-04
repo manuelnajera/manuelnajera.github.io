@@ -13,6 +13,14 @@
       rel="stylesheet"
     />
     <script>
+      // Set theme before React loads — prevents flash of wrong theme
+      ;(function () {
+        var saved = localStorage.getItem('theme')
+        var pref = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        document.documentElement.setAttribute('data-theme', pref)
+      })()
+    </script>
+    <script>
       // SPA GitHub Pages redirect: restore path from ?/path
       ;(function (l) {
         if (l.search[1] === '/') {

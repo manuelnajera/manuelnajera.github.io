@@ -12,11 +12,14 @@ export default function About() {
       <div className="max-w-6xl mx-auto grid md:grid-cols-[2fr_3fr] gap-16 lg:gap-24">
         {/* Left */}
         <div>
-          <p className="about-anim font-mono text-xs text-muted mb-6">{t('about.label')}</p>
-          <h2 className="about-anim font-display font-bold text-3xl sm:text-4xl text-text leading-tight mb-8">
+          <p className="about-anim font-mono text-xs mb-6" style={{ color: 'rgb(var(--color-muted))' }}>{t('about.label')}</p>
+          <h2
+            className="about-anim font-display font-bold text-3xl sm:text-4xl leading-tight mb-8"
+            style={{ color: 'rgb(var(--color-text))' }}
+          >
             {t('about.pullQuote')}
           </h2>
-          <p className="about-anim font-body text-sm text-muted leading-relaxed">
+          <p className="about-anim font-body text-sm leading-relaxed" style={{ color: 'rgb(var(--color-muted))' }}>
             {t('about.bio')}
           </p>
         </div>
