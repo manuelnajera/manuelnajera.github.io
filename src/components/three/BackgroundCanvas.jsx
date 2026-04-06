@@ -253,7 +253,8 @@ export default function BackgroundCanvas() {
     const mount = mountRef.current
     if (!mount) return
 
-    const isMobile = window.innerWidth < 768
+    // `let` so the resize handler can update it when the breakpoint crosses 768px
+    let currentMobile = window.innerWidth < 768
     const cfg = THEME_CFG[themeRef.current] ?? THEME_CFG.dark
     const c   = cfg.colors
     const o   = cfg.opacity
@@ -261,9 +262,9 @@ export default function BackgroundCanvas() {
     const refs = refsRef.current
 
     // ── Renderer ──────────────────────────────────────────────────────────
-    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true })
+    const renderer = new THREE.WebGLRenderer({ antialias: !currentMobile, alpha: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, currentMobile ? 1.5 : 2))
     renderer.setClearColor(0x000000, 0)
     mount.appendChild(renderer.domElement)
 
@@ -274,7 +275,15 @@ export default function BackgroundCanvas() {
     fogRef.current = fog
 
     // ── Camera ────────────────────────────────────────────────────────────
-    const cam = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 300)
+    // Mobile portrait has aspect ~0.56 → horizontal FOV = only ~32° at 55° vertical.
+    // Bridges placed at ±22 units fall outside that frustum. Use 70° on mobile so
+    // horizontal FOV opens to ~46°, making the repositioned bridges visible.
+    const cam = new THREE.PerspectiveCamera(
+      currentMobile ? 70 : 55,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      300
+    )
 
     // ── Shared tower geometry (reused across main + all fragment instances) ─
     const towerGeo = new THREE.BufferGeometry()
@@ -282,7 +291,7 @@ export default function BackgroundCanvas() {
 
     // ── Main tower — midground anchor ─────────────────────────────────────
     const towerMat = new THREE.LineBasicMaterial({
-      color: c.tower, transparent: true, opacity: isMobile ? o.tower * 0.80 : o.tower,
+      color: c.tower, transparent: true, opacity: currentMobile ? o.tower * 0.80 : o.tower,
       blending: b, depthWrite: false,
     })
     refs.towerMat = towerMat
@@ -303,7 +312,7 @@ export default function BackgroundCanvas() {
     // as the camera orbits → classic parallax against the stable midground tower.
     // Background fragments shift in the opposite direction, completing Z-depth.
     const fgMat = new THREE.LineBasicMaterial({
-      color: c.fgFrag, transparent: true, opacity: isMobile ? o.fg * 0.75 : o.fg,
+      color: c.fgFrag, transparent: true, opacity: currentMobile ? o.fg * 0.75 : o.fg,
       blending: b, depthWrite: false,
     })
     refs.fgMat = fgMat
@@ -365,26 +374,33 @@ export default function BackgroundCanvas() {
 
     const bridgeMat = new THREE.LineBasicMaterial({
       color: c.bridge, transparent: true,
-      opacity: isMobile ? o.bridge * 0.75 : o.bridge,
+      opacity: currentMobile ? o.bridge * 0.75 : o.bridge,
       blending: b, depthWrite: false,
     })
     refs.bridgeMat = bridgeMat
 
-    // Bridge 1: behind the tower, spanning left-right
+    // Desktop: bridges form an L-shaped infrastructure complex at mid-distance.
+    // Mobile: camera starts at angle=-0.25, sitting at (27.1, 5.5, -6.9) looking at origin.
+    //   Camera forward XZ ≈ (-0.969, 0, 0.246). Horizontal FOV ≈ 43° (±21.5° from center).
+    //   Previous attempts placed bridges at 5–11° from center → piled on top of the tower.
+    //   Solution: position bridge centers so each shows ONE pylon at ~15° on opposite sides:
+    //     Bridge 1 center (12, 0, 3)  → near pylon at (5.3, 0, -7.4) appears 15.7° RIGHT
+    //     Bridge 2 center (9, 0, -8)  → near pylon at (14.3, 0, 0.2)  appears 15.2° LEFT
+    //   Both use rotation.y = -1.0 (parallel spans) so spans never cross each other.
+    //   Both bridge centers are ≥8 units from tower base (±4.5 units).
     const br1 = new THREE.LineSegments(bridgeGeo1, bridgeMat)
-    br1.position.set(0, 0, 22)
-    br1.rotation.y = 0.15    // slight angle so it doesn't look perfectly parallel
+    br1.position.set(currentMobile ? 12 : 0, 0, currentMobile ? 3 : 22)
+    br1.rotation.y = currentMobile ? -1.0 : 0.15
     scene.add(br1)
 
-    // Bridge 2: to the right, spanning front-back (rotated 90°)
     const br2 = new THREE.LineSegments(bridgeGeo2, bridgeMat)
-    br2.position.set(22, 0, -4)
-    br2.rotation.y = Math.PI / 2 + 0.22
+    br2.position.set(currentMobile ? 9 : 22, 0, currentMobile ? -8 : -4)
+    br2.rotation.y = currentMobile ? -1.0 : Math.PI / 2 + 0.22
     scene.add(br2)
 
     // ── Node glow points (desktop only) ───────────────────────────────────
     let nodeMat = null
-    if (!isMobile) {
+    if (!currentMobile) {
       const nodeGeo = new THREE.BufferGeometry()
       nodeGeo.setAttribute('position', new THREE.BufferAttribute(buildNodePoints(), 3))
       nodeMat = new THREE.PointsMaterial({
@@ -467,9 +483,18 @@ export default function BackgroundCanvas() {
     document.addEventListener('visibilitychange', onVis)
 
     const onResize = () => {
+      const nowMobile = window.innerWidth < 768
       cam.aspect = window.innerWidth / window.innerHeight
-      cam.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
+      if (nowMobile !== currentMobile) {
+        currentMobile = nowMobile
+        cam.fov = nowMobile ? 70 : 55
+        br1.position.set(nowMobile ? 12 : 0,  0, nowMobile ? 3  : 22)
+        br1.rotation.y = nowMobile ? -1.0 : 0.15
+        br2.position.set(nowMobile ? 9 : 22, 0, nowMobile ? -8 : -4)
+        br2.rotation.y = nowMobile ? -1.0 : Math.PI / 2 + 0.22
+      }
+      cam.updateProjectionMatrix()
     }
     window.addEventListener('resize', onResize)
 

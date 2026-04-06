@@ -15,7 +15,7 @@ Personal portfolio for Manuel Nájera — civil engineer turned full-stack devel
 
 - **React 18 + Vite 5** — SPA, fast builds
 - **Tailwind CSS v3** — utility-first styling with custom engineering palette
-- **Three.js** — WebGL wireframe terrain background (500-point grid, mouse deformation, scroll fade)
+- **Three.js** — Procedural 3D infrastructure scene: lattice tower, two suspension bridges, structural fragments at multiple depth layers, Fibonacci particle atmosphere. All geometry built from `Float32Array` at runtime — no asset files. Scroll drives a 270° camera orbit; mouse adds ±0.16 rad parallax.
 - **GSAP 3 + ScrollTrigger** — section entry animations, timeline draw, scroll effects
 - **Framer Motion** — page transitions between `/` (EN) and `/es`
 - **react-i18next** — English and Spanish, URL-based language detection
@@ -37,7 +37,7 @@ src/
 ├── components/
 │   ├── layout/        Header, Footer
 │   ├── sections/      Hero, About, Projects, Skills, Contact
-│   ├── three/         GridCanvas (Three.js background)
+│   ├── three/         BackgroundCanvas (Three.js infrastructure scene)
 │   └── ui/            Tag, Timeline, ProjectCard
 ├── hooks/             useScrollAnimation (GSAP ScrollTrigger wrapper)
 ├── i18n/              react-i18next config
@@ -56,9 +56,9 @@ public/
 
 | # | Section | Description |
 |---|---------|-------------|
-| 01 | Hero | Full-viewport, Three.js grid, typewriter role cycling |
+| 01 | Hero | Full-viewport 3D scene, annotation text chips, typewriter role cycling |
 | 02 | About | Story + animated timeline (civil engineering → software) |
-| 03 | Projects | DeltaVis + InsumosDentalesChiapas — production systems |
+| 03 | Projects | InsumosDentalesChiapas (IN PRODUCTION) + DeltaVis — real systems |
 | 04 | Stack | Three rows of skill tags with scroll-entry glow |
 | 05 | Contact | LinkedIn + email CTAs |
 
