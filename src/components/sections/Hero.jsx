@@ -64,19 +64,31 @@ export default function Hero() {
 
       {/* Center content — z-10 keeps it clearly above the fixed canvas */}
       <div className="relative z-10 text-center px-6 max-w-5xl">
+        {/* Name — individual backdrop so the 3D object peeks around the text */}
         <h1
           ref={nameRef}
-          className="font-display font-bold text-[clamp(44px,8vw,96px)] leading-none tracking-tight"
-          style={{ opacity: 0, color: 'rgb(var(--color-text))' }}
+          className="font-display font-bold text-[clamp(44px,8vw,96px)] leading-none tracking-tight inline-block px-4 py-1"
+          style={{
+            opacity: 0,
+            color: 'rgb(var(--color-text))',
+            background: 'rgba(var(--color-bg), 0.55)',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+          }}
         >
           Manuel Nájera
         </h1>
 
-        {/* Typewriter row — accent blue in dark mode, text color in light mode */}
+        {/* Typewriter row */}
         <div className="mt-8 h-10 flex items-center justify-center">
           <span
-            className="font-mono text-xl sm:text-2xl"
-            style={{ color: theme === 'light' ? 'rgb(var(--color-text))' : 'rgb(var(--color-accent))' }}
+            className="font-mono text-xl sm:text-2xl px-3 py-0.5"
+            style={{
+              color: theme === 'light' ? 'rgb(var(--color-text))' : 'rgb(var(--color-accent))',
+              background: 'rgba(var(--color-bg), 0.50)',
+              backdropFilter: 'blur(4px)',
+              WebkitBackdropFilter: 'blur(4px)',
+            }}
           >
             {displayed}
             <span className="cursor-blink ml-0.5">|</span>
@@ -85,8 +97,14 @@ export default function Hero() {
 
         <p
           ref={taglineRef}
-          className="mt-5 font-body text-base sm:text-lg max-w-sm mx-auto"
-          style={{ opacity: 0, color: 'rgb(var(--color-muted))' }}
+          className="mt-5 font-body text-base sm:text-lg max-w-sm mx-auto px-3 py-1"
+          style={{
+            opacity: 0,
+            color: 'rgb(var(--color-muted))',
+            background: 'rgba(var(--color-bg), 0.45)',
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
+          }}
         >
           {t('hero.tagline')}
         </p>

@@ -14,24 +14,24 @@ export default function Projects() {
 
         <div className="space-y-6">
           <ProjectCard
-            title={t('projects.deltavis.title')}
-            url={t('projects.deltavis.url')}
-            oneliner={t('projects.deltavis.oneliner')}
-            description={t('projects.deltavis.description')}
-            tags={t('projects.deltavis.tags', { returnObjects: true })}
-            featured
-            featuredLabel={t('projects.featured')}
-            liveLabel={t('projects.live')}
-            href="deltavis.app"
-          />
-          <ProjectCard
             title={t('projects.insumos.title')}
             url={t('projects.insumos.url')}
             oneliner={t('projects.insumos.oneliner')}
             description={t('projects.insumos.description')}
             tags={t('projects.insumos.tags', { returnObjects: true })}
+            featured
+            featuredLabel={t('projects.inProduction')}
             liveLabel={t('projects.live')}
             href="insumosdentaleschiapas.com.mx"
+          />
+          <ProjectCard
+            title={t('projects.deltavis.title')}
+            url={t('projects.deltavis.url')}
+            oneliner={t('projects.deltavis.oneliner')}
+            description={t('projects.deltavis.description')}
+            tags={t('projects.deltavis.tags', { returnObjects: true })}
+            liveLabel={t('projects.live')}
+            href="deltavis.app"
           />
         </div>
       </div>

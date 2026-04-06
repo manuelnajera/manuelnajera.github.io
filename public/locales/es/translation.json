@@ -6,7 +6,12 @@
     "contact": "Contacto"
   },
   "hero": {
-    "roles": ["Ingeniero Civil", "Desarrollador Full-Stack", "Constructor de Sistemas 3D", "Infraestructura + Software"],
+    "roles": [
+      "Ingeniero Civil",
+      "Desarrollador Full-Stack",
+      "Constructor de Sistemas 3D",
+      "Infraestructura + Software"
+    ],
     "tagline": "Construyo software para el mundo físico.",
     "scroll": "↓ Desplazar"
   },
@@ -52,30 +57,71 @@
       "url": "deltavis.app",
       "oneliner": "Plataforma 3D de monitoreo de construcción para ingenieros civiles.",
       "description": "Carga dos escaneos 3D del mismo sitio de construcción en fechas distintas, los alinea matemáticamente usando el algoritmo Kabsch — Jacobi SVD implementado desde cero, sin librería de álgebra lineal — mide los cambios volumétricos y exporta un reporte PDF profesional. Construido para los flujos de trabajo reales de ingenieros civiles y operadores de drones.",
-      "tags": ["React", "Three.js", "Firebase", "Claude API", "GitHub Actions"]
+      "tags": [
+        "React",
+        "Three.js",
+        "Firebase",
+        "Claude API",
+        "GitHub Actions"
+      ]
     },
     "insumos": {
       "title": "InsumosDentales Chiapas",
       "url": "insumosdentaleschiapas.com.mx",
       "oneliner": "Comercio full-stack + POS físico para un distribuidor dental.",
       "description": "Sistema de doble canal: tienda en línea con MercadoPago Checkout Pro y punto de venta físico con terminal MercadoPago Point Smart 2. Notificaciones push FCM, puntos de lealtad con transacciones Firestore seguras ante condiciones de carrera, acceso multi-rol y flujo completo de gestión de pedidos.",
-      "tags": ["React", "Firebase", "MercadoPago", "Cloud Functions", "Cloudinary", "FCM"]
-    }
+      "tags": [
+        "React",
+        "Firebase",
+        "MercadoPago",
+        "Cloud Functions",
+        "Cloudinary",
+        "FCM"
+      ]
+    },
+    "inProduction": "LIVE"
   },
   "skills": {
     "label": "04 / Stack",
     "rows": [
       {
         "category": "Frontend & 3D",
-        "items": ["React 18", "Vite", "Tailwind CSS", "Three.js", "Zustand", "PWA", "jsPDF"]
+        "items": [
+          "React 18",
+          "Vite",
+          "Tailwind CSS",
+          "Three.js",
+          "Zustand",
+          "PWA",
+          "jsPDF"
+        ]
       },
       {
         "category": "Backend e Infraestructura",
-        "items": ["Firebase Auth", "Firestore", "Cloud Storage", "Cloud Functions", "Firebase Hosting", "GitHub Actions", "MercadoPago", "Cloudinary", "FCM"]
+        "items": [
+          "Firebase Auth",
+          "Firestore",
+          "Cloud Storage",
+          "Cloud Functions",
+          "Firebase Hosting",
+          "GitHub Actions",
+          "MercadoPago",
+          "Cloudinary",
+          "FCM"
+        ]
       },
       {
         "category": "Dominio & Herramientas",
-        "items": ["Ingeniería Civil", "Fotogrametría", "Dron (UAV)", "LiDAR", "AutoCAD", "Excel / VBA", "Python", "SQL"]
+        "items": [
+          "Ingeniería Civil",
+          "Fotogrametría",
+          "Dron (UAV)",
+          "LiDAR",
+          "AutoCAD",
+          "Excel / VBA",
+          "Python",
+          "SQL"
+        ]
       }
     ]
   },

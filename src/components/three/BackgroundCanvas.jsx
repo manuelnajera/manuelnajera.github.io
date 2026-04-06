@@ -3,296 +3,364 @@ import * as THREE from 'three'
 import { gsap } from 'gsap'
 import { useTheme } from '../../context/ThemeContext.jsx'
 
-const COLS = 25
-const ROWS = 20
-const POINT_COUNT = COLS * ROWS
-const SPREAD_X = 22
-const SPREAD_Y = 18
-const Z_NOISE = 1.4
+// ── Lattice Tower Parameters ──────────────────────────────────────────────────
+const T_LEVELS  = 12
+const T_HEIGHT  = 22
+const T_BASE_H  = 4.5
+const T_TOP_H   = 0.85
+const T_LEVEL_H = T_HEIGHT / T_LEVELS
 
-// ── Scroll state per section ─────────────────────────────────────────────
-// cam [x,y,z]: camera position
-// look [x,y]: lookAt target (z is always 0)
-// opacity: grid line opacity (dark mode base)
-// waveA: Z-wave amplitude — controls how "alive" the grid feels
-// waveF: Z-wave frequency
-// scaleX/Y: grid scale on those axes
-const SCROLL_STATES = [
-  // Hero — wide surveying view, active wave, prominent grid
-  { at: 0.00, cam: [0,   5, 20], look: [ 0,  0], opacity: 0.30, waveA: 0.55, waveF: 0.45, scaleX: 1.00, scaleY: 1.00 },
-  // About — camera drifts left and up, grid compresses vertically
-  { at: 0.22, cam: [-4,  7, 19], look: [-1,  0], opacity: 0.22, waveA: 0.22, waveF: 0.75, scaleX: 0.85, scaleY: 1.20 },
-  // Projects — camera swings right and low, grid stretches wide
-  { at: 0.46, cam: [ 5,  2, 23], look: [ 1, -1], opacity: 0.26, waveA: 0.38, waveF: 1.10, scaleX: 1.30, scaleY: 0.75 },
-  // Skills — camera rises high to survey, big rolling wave
-  { at: 0.68, cam: [ 0, 11, 19], look: [ 0,  0], opacity: 0.20, waveA: 0.65, waveF: 0.38, scaleX: 1.40, scaleY: 1.40 },
-  // Contact — camera pulls in close, grid shrinks, tight rapid wave
-  { at: 0.88, cam: [ 0,  1, 14], look: [ 0,  0], opacity: 0.26, waveA: 0.18, waveF: 1.70, scaleX: 0.70, scaleY: 0.70 },
-]
-
-// Light mode: grid needs higher opacity to be visible against light bg
-const LIGHT_OPACITY_BOOST = 1.5
-// Dark mode Three.js color / light mode color
-const GRID_COLOR = { dark: 0x3b82f6, light: 0x1d4ed8 }
-
-// Smoothstep — eases transitions between states
-const smoothstep = (t) => t * t * (3 - 2 * t)
-
-// Linear interpolate
-const lerp = (a, b, t) => a + (b - a) * t
-
-// Frame-rate independent lerp using exponential decay
-// halfLife: frames (at 60fps) for error to halve
-const expLerp = (cur, tgt, halfLife, dt) => {
-  const factor = 1 - Math.pow(0.5, (dt * 60) / halfLife)
-  return cur + (tgt - cur) * factor
+function halfAt(ly) {
+  return T_BASE_H + (T_TOP_H - T_BASE_H) * (ly / T_LEVELS)
 }
 
-export default function BackgroundCanvas() {
-  const mountRef = useRef(null)
-  const materialRef = useRef(null)
-  const themeRef = useRef('dark')
-  const { theme } = useTheme()
+function cornersAt(ly) {
+  const h = halfAt(ly)
+  const y = ly * T_LEVEL_H
+  return [[-h, y, -h], [h, y, -h], [h, y, h], [-h, y, h]]
+}
 
-  // Update Three.js color when theme changes — no re-init required
+// ── Geometry Builders ─────────────────────────────────────────────────────────
+function buildTower() {
+  const v = []
+  for (let ly = 0; ly < T_LEVELS; ly++) {
+    const lo = cornersAt(ly)
+    const hi = cornersAt(ly + 1)
+    for (let c = 0; c < 4; c++) v.push(...lo[c], ...lo[(c + 1) % 4])   // horizontal ring
+    for (let c = 0; c < 4; c++) v.push(...lo[c], ...hi[c])              // vertical columns
+    for (let c = 0; c < 4; c++) {                                        // X-brace each face
+      const cn = (c + 1) % 4
+      v.push(...lo[c], ...hi[cn])
+      v.push(...lo[cn], ...hi[c])
+    }
+  }
+  const top = cornersAt(T_LEVELS)
+  for (let c = 0; c < 4; c++) v.push(...top[c], ...top[(c + 1) % 4])   // top cap
+  return new Float32Array(v)
+}
+
+function buildCrossMembers() {
+  const v = []
+  for (let ly = 2; ly < T_LEVELS; ly += 2) {
+    const cs = cornersAt(ly)
+    v.push(...cs[0], ...cs[2])
+    v.push(...cs[1], ...cs[3])
+  }
+  return new Float32Array(v)
+}
+
+function buildNodePoints() {
+  const v = []
+  for (let ly = 0; ly <= T_LEVELS; ly++) {
+    for (const c of cornersAt(ly)) v.push(...c)
+  }
+  return new Float32Array(v)
+}
+
+function buildGroundGrid(size = 48, step = 2.8) {
+  const v = []
+  const n = Math.round(size / step)
+  const half = size / 2
+  for (let i = 0; i <= n; i++) {
+    const p = -half + i * step
+    v.push(-half, 0, p, half, 0, p)
+    v.push(p, 0, -half, p, 0, half)
+  }
+  return new Float32Array(v)
+}
+
+// ── Fragment instances — reuses tower geometry at different scales + positions ─
+// Foreground: inside camera orbit radius (7–10) — shifts heavily as cam moves
+// Background: outside camera orbit (35–45) — shifts opposite direction
+const FRAGMENT_DEFS = [
+  // [x, y, z, scale, rotY, layer]   layer: 'fg' | 'bg'
+  [ 8.5,  6.0,  2.0,  0.19, 0.5,  'fg'],
+  [-2.0, 10.5,  9.0,  0.14, 1.8,  'fg'],
+  [-9.0,  2.5, -2.5,  0.17, 3.3,  'fg'],
+  [28.0,  7.0, 22.0,  0.11, 0.9,  'bg'],
+  [-32.0,13.0, -6.0,  0.09, 2.2,  'bg'],
+  [ 8.0,  5.0,-38.0,  0.10, 4.1,  'bg'],
+]
+
+// ── Camera Orbit Path ─────────────────────────────────────────────────────────
+const CAM_KEYS = [
+  { at: 0.00, angle: -0.25, elev:  5.5, radius: 28, lookY: T_HEIGHT * 0.30 },
+  { at: 0.25, angle:  0.90, elev:  3.0, radius: 23, lookY: T_HEIGHT * 0.28 },
+  { at: 0.50, angle:  2.00, elev:  0.8, radius: 18, lookY: T_HEIGHT * 0.22 },
+  { at: 0.72, angle:  3.20, elev: 26.0, radius: 28, lookY: T_HEIGHT * 0.60 },
+  { at: 1.00, angle:  4.80, elev:  9.0, radius: 24, lookY: T_HEIGHT * 0.38 },
+]
+
+const ss  = (t) => t * t * (3 - 2 * t)
+const lrp = (a, b, t) => a + (b - a) * t
+
+function sampleCam(progress) {
+  const p = Math.max(0, Math.min(1, progress))
+  let i = 0
+  while (i < CAM_KEYS.length - 2 && p >= CAM_KEYS[i + 1].at) i++
+  const a = CAM_KEYS[i], b = CAM_KEYS[i + 1]
+  const range = b.at - a.at
+  const t = ss(range > 0 ? Math.max(0, Math.min(1, (p - a.at) / range)) : 1)
+  return {
+    angle:  lrp(a.angle,  b.angle,  t),
+    elev:   lrp(a.elev,   b.elev,   t),
+    radius: lrp(a.radius, b.radius, t),
+    lookY:  lrp(a.lookY,  b.lookY,  t),
+  }
+}
+
+// ── Theme configs ─────────────────────────────────────────────────────────────
+// Light mode: AdditiveBlending + light bg = lines vanish (adds color to white = white).
+// Switch to NormalBlending in light and compensate with higher opacity.
+const THEME_CFG = {
+  dark: {
+    colors:   { tower: 0x3b82f6, cross: 0x3b82f6, grid: 0x3b82f6,
+                node: 0x93c5fd, fgFrag: 0x3b82f6, bgFrag: 0x3b82f6, fog: 0x050508 },
+    opacity:  { tower: 0.82, cross: 0.30, grid: 0.09, node: 0.90, fg: 0.28, bg: 0.09 },
+    blending: THREE.AdditiveBlending,
+  },
+  light: {
+    colors:   { tower: 0x1e40af, cross: 0x1e3a8a, grid: 0x1e40af,
+                node: 0x1d4ed8, fgFrag: 0x1e40af, bgFrag: 0x1e40af, fog: 0xf1f5f9 },
+    opacity:  { tower: 0.92, cross: 0.65, grid: 0.25, node: 0.95, fg: 0.60, bg: 0.22 },
+    blending: THREE.NormalBlending,
+  },
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
+export default function BackgroundCanvas() {
+  const mountRef   = useRef(null)
+  const refsRef    = useRef({})   // collects all material refs for theme updates
+  const fogRef     = useRef(null)
+  const themeRef   = useRef('dark')
+  const { theme }  = useTheme()
+
   useEffect(() => {
     themeRef.current = theme
-    if (!materialRef.current) return
-    materialRef.current.color.setHex(GRID_COLOR[theme] ?? GRID_COLOR.dark)
+    const cfg = THEME_CFG[theme] ?? THEME_CFG.dark
+    const { colors: c, opacity: o, blending: b } = cfg
+    const r = refsRef.current
+
+    const applyMat = (mat, hex, opacity) => {
+      if (!mat) return
+      mat.color.setHex(hex)
+      mat.opacity = opacity
+      mat.blending = b
+      mat.needsUpdate = true
+    }
+
+    applyMat(r.towerMat, c.tower,  o.tower)
+    applyMat(r.crossMat, c.cross,  o.cross)
+    applyMat(r.gridMat,  c.grid,   o.grid)
+    applyMat(r.fgMat,    c.fgFrag, o.fg)
+    applyMat(r.bgMat,    c.bgFrag, o.bg)
+    if (r.nodeMat) {
+      r.nodeMat.color.setHex(c.node)
+      r.nodeMat.opacity = o.node
+      r.nodeMat.blending = b
+      r.nodeMat.needsUpdate = true
+    }
+    if (fogRef.current) fogRef.current.color.setHex(c.fog)
   }, [theme])
 
   useEffect(() => {
     const mount = mountRef.current
     if (!mount) return
 
-    // ── Renderer ─────────────────────────────────────────────────────────
-    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true })
+    const isMobile = window.innerWidth < 768
+    const cfg = THEME_CFG[themeRef.current] ?? THEME_CFG.dark
+    const c   = cfg.colors
+    const o   = cfg.opacity
+    const b   = cfg.blending
+    const refs = refsRef.current
+
+    // ── Renderer ──────────────────────────────────────────────────────────
+    const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2))
     renderer.setClearColor(0x000000, 0)
     mount.appendChild(renderer.domElement)
 
-    // ── Scene + camera ────────────────────────────────────────────────────
+    // ── Scene + fog ───────────────────────────────────────────────────────
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(
-      58,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    )
-    camera.position.set(0, 5, 20)
-    camera.lookAt(0, 0, 0)
+    const fog   = new THREE.FogExp2(c.fog, 0.014)
+    scene.fog   = fog
+    fogRef.current = fog
 
-    // ── Grid geometry ─────────────────────────────────────────────────────
-    const positions = new Float32Array(POINT_COUNT * 3)
-    const originalZ = new Float32Array(POINT_COUNT)
-    const lineIndices = []
+    // ── Camera ────────────────────────────────────────────────────────────
+    const cam = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 300)
 
-    for (let row = 0; row < ROWS; row++) {
-      for (let col = 0; col < COLS; col++) {
-        const i = row * COLS + col
-        const x = (col / (COLS - 1) - 0.5) * SPREAD_X
-        const y = (row / (ROWS - 1) - 0.5) * SPREAD_Y
-        const z = (Math.random() - 0.5) * Z_NOISE
+    // ── Shared tower geometry (reused across main + all fragment instances) ─
+    const towerGeo = new THREE.BufferGeometry()
+    towerGeo.setAttribute('position', new THREE.BufferAttribute(buildTower(), 3))
 
-        positions[i * 3]     = x
-        positions[i * 3 + 1] = y
-        positions[i * 3 + 2] = z
-        originalZ[i] = z
-
-        if (col < COLS - 1) lineIndices.push(i, i + 1)
-        if (row < ROWS - 1) lineIndices.push(i, i + COLS)
-      }
-    }
-
-    const geometry = new THREE.BufferGeometry()
-    const posAttr = new THREE.BufferAttribute(positions, 3)
-    posAttr.setUsage(THREE.DynamicDrawUsage)
-    geometry.setAttribute('position', posAttr)
-    geometry.setIndex(lineIndices)
-
-    const material = new THREE.LineBasicMaterial({
-      color: GRID_COLOR[themeRef.current] ?? GRID_COLOR.dark,
-      transparent: true,
-      opacity: 0.30,
+    // ── Main tower — midground anchor ─────────────────────────────────────
+    const towerMat = new THREE.LineBasicMaterial({
+      color: c.tower, transparent: true, opacity: isMobile ? o.tower * 0.80 : o.tower,
+      blending: b, depthWrite: false,
     })
-    materialRef.current = material
+    refs.towerMat = towerMat
+    scene.add(new THREE.LineSegments(towerGeo, towerMat))
 
-    const grid = new THREE.LineSegments(geometry, material)
-    scene.add(grid)
+    // ── Cross members — secondary structural detail ────────────────────────
+    const crossGeo = new THREE.BufferGeometry()
+    crossGeo.setAttribute('position', new THREE.BufferAttribute(buildCrossMembers(), 3))
+    const crossMat = new THREE.LineBasicMaterial({
+      color: c.cross, transparent: true, opacity: o.cross,
+      blending: b, depthWrite: false,
+    })
+    refs.crossMat = crossMat
+    scene.add(new THREE.LineSegments(crossGeo, crossMat))
 
-    // ── Animated state — smoothly tracks scroll-driven targets ───────────
-    // Using a single object so we can iterate keys for the lerp loop
-    const cur = {
-      camX: 0, camY: 5, camZ: 20,
-      lookX: 0, lookY: 0,
-      opacity: 0.30,
-      waveA: 0.55, waveF: 0.45,
-      scaleX: 1.0, scaleY: 1.0,
+    // ── Depth layers: foreground fragments (inside orbit) + background (outside) ─
+    // Foreground fragments are visually LARGER on screen (closer) and shift more
+    // as the camera orbits → classic parallax against the stable midground tower.
+    // Background fragments shift in the opposite direction, completing Z-depth.
+    const fgMat = new THREE.LineBasicMaterial({
+      color: c.fgFrag, transparent: true, opacity: isMobile ? o.fg * 0.75 : o.fg,
+      blending: b, depthWrite: false,
+    })
+    refs.fgMat = fgMat
+
+    const bgMat = new THREE.LineBasicMaterial({
+      color: c.bgFrag, transparent: true, opacity: o.bg,
+      blending: b, depthWrite: false,
+    })
+    refs.bgMat = bgMat
+
+    const fragments = []
+    for (const [x, y, z, scale, rotY, layer] of FRAGMENT_DEFS) {
+      const mesh = new THREE.LineSegments(towerGeo, layer === 'fg' ? fgMat : bgMat)
+      mesh.scale.setScalar(scale)
+      mesh.position.set(x, y, z)
+      mesh.rotation.y = rotY
+      // Slight X tilt so they read as structural fragments, not upright copies
+      mesh.rotation.x = layer === 'fg' ? 0.08 : -0.05
+      scene.add(mesh)
+      fragments.push({ mesh, layer, baseRotY: rotY })
     }
 
-    // Half-life (frames at 60fps) for each state property
-    // Lower = snappier, higher = more cinematic lag
-    const HALF_LIFE = {
-      camX: 30, camY: 30, camZ: 30,    // camera: 0.5s to halve the distance
-      lookX: 25, lookY: 25,
-      opacity: 20,
-      waveA: 35, waveF: 35,            // wave params: slower change for continuity
-      scaleX: 40, scaleY: 40,          // scale: very smooth, barely noticeable shift
+    // ── Ground survey grid ─────────────────────────────────────────────────
+    const gridGeo = new THREE.BufferGeometry()
+    gridGeo.setAttribute('position', new THREE.BufferAttribute(buildGroundGrid(), 3))
+    const gridMat = new THREE.LineBasicMaterial({
+      color: c.grid, transparent: true, opacity: o.grid,
+      blending: b, depthWrite: false,
+    })
+    refs.gridMat = gridMat
+    scene.add(new THREE.LineSegments(gridGeo, gridMat))
+
+    // ── Node glow points (desktop only) ───────────────────────────────────
+    let nodeMat = null
+    if (!isMobile) {
+      const nodeGeo = new THREE.BufferGeometry()
+      nodeGeo.setAttribute('position', new THREE.BufferAttribute(buildNodePoints(), 3))
+      nodeMat = new THREE.PointsMaterial({
+        color: c.node, size: 0.18, transparent: true, opacity: o.node,
+        blending: b, depthWrite: false, sizeAttenuation: true,
+      })
+      refs.nodeMat = nodeMat
+      scene.add(new THREE.Points(nodeGeo, nodeMat))
     }
 
-    // ── Interaction ───────────────────────────────────────────────────────
-    const mouse = new THREE.Vector2(9999, 9999)
-    const raycaster = new THREE.Raycaster()
-    const hitPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0)
-    const mouseWorld = new THREE.Vector3()
+    // ── Interaction state ──────────────────────────────────────────────────
     let scrollProgress = 0
+    const mouse  = { x: 0, y: 0 }
+    const tMouse = { x: 0, y: 0 }
+    const cur    = { ...sampleCam(0) }
 
-    const onMouseMove = (e) => {
-      mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
-    }
-    const onTouchMove = (e) => {
-      const t = e.touches[0]
-      mouse.x =  (t.clientX / window.innerWidth)  * 2 - 1
-      mouse.y = -(t.clientY / window.innerHeight) * 2 + 1
-    }
     const onScroll = () => {
       const max = document.body.scrollHeight - window.innerHeight
       scrollProgress = max > 0 ? window.scrollY / max : 0
     }
-
+    const onMouseMove = (e) => {
+      tMouse.x = e.clientX / window.innerWidth  - 0.5
+      tMouse.y = e.clientY / window.innerHeight - 0.5
+    }
+    window.addEventListener('scroll',    onScroll,    { passive: true })
     window.addEventListener('mousemove', onMouseMove)
-    window.addEventListener('touchmove', onTouchMove, { passive: true })
-    window.addEventListener('scroll', onScroll, { passive: true })
 
-    // ── Animation loop ────────────────────────────────────────────────────
-    let rafId
-    let running = true
-    let time = 0
-    let lastTs = performance.now()
+    // ── Animation loop ─────────────────────────────────────────────────────
+    let rafId, running = true, time = 0, lastTs = performance.now()
 
     const animate = (now) => {
       if (!running) return
       rafId = requestAnimationFrame(animate)
 
-      // Frame-rate independent delta time (capped at 50ms to prevent spiral on hidden tab)
       const dt = Math.min((now - lastTs) / 1000, 0.05)
       lastTs = now
-      time += dt
+      time  += dt
 
-      // ── Find which two scroll states we're interpolating between ───────
-      let idx = SCROLL_STATES.length - 2
-      for (let i = 0; i < SCROLL_STATES.length - 1; i++) {
-        if (scrollProgress < SCROLL_STATES[i + 1].at) { idx = i; break }
-      }
-      const s0 = SCROLL_STATES[idx]
-      const s1 = SCROLL_STATES[idx + 1]
-      const range = s1.at - s0.at
-      const raw = range > 0 ? (scrollProgress - s0.at) / range : 1
-      // Smoothstep easing between the two section states
-      const eT = smoothstep(Math.max(0, Math.min(1, raw)))
+      mouse.x += (tMouse.x - mouse.x) * 0.06
+      mouse.y += (tMouse.y - mouse.y) * 0.06
 
-      // Compute interpolated target values between the two states
-      const tgt = {
-        camX:  lerp(s0.cam[0],  s1.cam[0],  eT),
-        camY:  lerp(s0.cam[1],  s1.cam[1],  eT),
-        camZ:  lerp(s0.cam[2],  s1.cam[2],  eT),
-        lookX: lerp(s0.look[0], s1.look[0], eT),
-        lookY: lerp(s0.look[1], s1.look[1], eT),
-        opacity: lerp(s0.opacity, s1.opacity, eT),
-        waveA:   lerp(s0.waveA,   s1.waveA,   eT),
-        waveF:   lerp(s0.waveF,   s1.waveF,   eT),
-        scaleX:  lerp(s0.scaleX,  s1.scaleX,  eT),
-        scaleY:  lerp(s0.scaleY,  s1.scaleY,  eT),
-      }
+      // Smooth camera toward scroll-driven target
+      const tgt = sampleCam(scrollProgress)
+      const k   = 1 - Math.pow(0.5, dt * 60 / 28)
+      cur.angle  += (tgt.angle  - cur.angle)  * k
+      cur.elev   += (tgt.elev   - cur.elev)   * k
+      cur.radius += (tgt.radius - cur.radius) * k
+      cur.lookY  += (tgt.lookY  - cur.lookY)  * k
 
-      // Smooth each current value toward its target using exponential decay
-      for (const key in cur) {
-        cur[key] = expLerp(cur[key], tgt[key], HALF_LIFE[key] ?? 30, dt)
+      const finalAngle = cur.angle + mouse.x * 0.16
+      const finalElev  = cur.elev  - mouse.y * 1.2
+
+      cam.position.set(
+        Math.cos(finalAngle) * cur.radius,
+        finalElev,
+        Math.sin(finalAngle) * cur.radius,
+      )
+      cam.lookAt(0, cur.lookY, 0)
+
+      // Very slow self-rotation on fragments — different rates per fragment
+      // so they feel like independently drifting structural artifacts
+      for (let i = 0; i < fragments.length; i++) {
+        const { mesh, layer } = fragments[i]
+        const rate = layer === 'fg' ? 0.00012 + i * 0.00004 : 0.00007 + i * 0.00003
+        mesh.rotation.y += rate * dt * 60
       }
 
-      // ── Apply camera ───────────────────────────────────────────────────
-      camera.position.set(cur.camX, cur.camY, cur.camZ)
-      camera.lookAt(cur.lookX, cur.lookY, 0)
+      // Node glow pulse
+      if (nodeMat) nodeMat.opacity = 0.55 + Math.sin(time * 1.4) * 0.35
 
-      // ── Apply opacity (boost in light mode for visibility on light bg) ─
-      const boost = themeRef.current === 'light' ? LIGHT_OPACITY_BOOST : 1
-      material.opacity = Math.min(cur.opacity * boost, 0.95)
-
-      // ── Apply grid scale ───────────────────────────────────────────────
-      grid.scale.set(cur.scaleX, cur.scaleY, 1)
-
-      // ── Continuous slow rotation ───────────────────────────────────────
-      grid.rotation.x += 0.00018 * dt * 60
-      grid.rotation.y += 0.00022 * dt * 60
-
-      // ── Mouse deformation fades out as user leaves the hero ────────────
-      const mouseInfluence = Math.max(0, 1 - scrollProgress * 5)
-      if (mouseInfluence > 0.01) {
-        raycaster.setFromCamera(mouse, camera)
-        raycaster.ray.intersectPlane(hitPlane, mouseWorld)
-      }
-
-      // ── Update vertex Z: rolling wave + mouse push ─────────────────────
-      for (let i = 0; i < POINT_COUNT; i++) {
-        const col = i % COLS
-        const row = Math.floor(i / COLS)
-
-        // Rolling wave that changes character (amplitude + frequency) per section
-        const wave = Math.sin(time * cur.waveF + col * 0.4 + row * 0.3) * cur.waveA
-        let z = originalZ[i] + wave
-
-        // Mouse pushes vertices away — only active near the top of the page
-        if (mouseInfluence > 0.01) {
-          const dx = posAttr.getX(i) - mouseWorld.x
-          const dy = posAttr.getY(i) - mouseWorld.y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          const push = Math.max(0, 1 - dist / 3.5) * 0.9 * mouseInfluence
-          z += push
-        }
-
-        posAttr.setZ(i, z)
-      }
-      posAttr.needsUpdate = true
-
-      renderer.render(scene, camera)
+      renderer.render(scene, cam)
     }
 
     animate(performance.now())
 
-    // Pause when tab is hidden (save GPU)
-    const onVisibility = () => {
+    const onVis = () => {
       running = !document.hidden
       if (running) { lastTs = performance.now(); animate(lastTs) }
     }
-    document.addEventListener('visibilitychange', onVisibility)
+    document.addEventListener('visibilitychange', onVis)
 
-    // Resize
     const onResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
+      cam.aspect = window.innerWidth / window.innerHeight
+      cam.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
     }
     window.addEventListener('resize', onResize)
 
-    // Fade in on mount
-    gsap.fromTo(renderer.domElement, { opacity: 0 }, { opacity: 1, duration: 1.8, delay: 0.2 })
+    gsap.fromTo(renderer.domElement, { opacity: 0 }, { opacity: 1, duration: 2.2, delay: 0.3 })
 
     return () => {
       running = false
       cancelAnimationFrame(rafId)
-      window.removeEventListener('mousemove', onMouseMove)
-      window.removeEventListener('touchmove', onTouchMove)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onResize)
-      document.removeEventListener('visibilitychange', onVisibility)
-      geometry.dispose()
-      material.dispose()
+      window.removeEventListener('scroll',            onScroll)
+      window.removeEventListener('mousemove',         onMouseMove)
+      window.removeEventListener('resize',            onResize)
+      document.removeEventListener('visibilitychange', onVis)
+      // Dispose unique geometries (shared towerGeo disposed once)
+      towerGeo.dispose()
+      crossGeo.dispose()
+      gridGeo.dispose()
+      towerMat.dispose(); crossMat.dispose(); gridMat.dispose()
+      fgMat.dispose(); bgMat.dispose()
+      if (nodeMat) nodeMat.dispose()
       renderer.dispose()
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement)
     }
-  }, []) // intentionally mount-only — theme updates handled by the separate useEffect above
+  }, [])
 
   return (
     <div
