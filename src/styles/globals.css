@@ -87,18 +87,19 @@ main > section:first-child {
   background-color: transparent;
 }
 
-/* Other sections: 65% opaque — enough for readability, lets 35% of canvas through */
+/* Content sections: 82% opacity — text is fully readable, 3D glows through
+   subtly so the scroll-driven camera orbit is felt throughout the page. */
 #about,
 #projects,
 #stack,
 #contact {
-  background-color: rgba(var(--bg-rgb), 0.65);
+  background-color: rgba(var(--bg-rgb), 0.82);
 }
 
 footer {
   position: relative;
   z-index: 1;
-  background-color: rgba(var(--bg-rgb), 0.90);
+  background-color: rgba(var(--bg-rgb), 0.88);
 }
 
 /* ─── Light mode: ensure hero text reads against the light background ───── */

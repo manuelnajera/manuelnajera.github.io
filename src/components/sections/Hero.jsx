@@ -57,23 +57,30 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden scanlines">
 
-      {/* Coordinate label — Tuxtla Gutiérrez, Chiapas */}
-      <div className="absolute bottom-8 left-6 font-mono text-xs text-muted/60 z-10 hidden sm:block">
+      {/* Coordinate label */}
+      <div
+        className="absolute bottom-8 left-6 font-mono text-xs z-10 hidden sm:block px-2 py-0.5"
+        style={{
+          color: 'rgb(var(--color-muted))',
+          background: 'rgba(var(--bg-rgb), 0.88)',
+          outline: '1px solid rgba(59,130,246,0.12)',
+        }}
+      >
         16.7516° N / 93.1152° W
       </div>
 
-      {/* Center content — z-10 keeps it clearly above the fixed canvas */}
+      {/* Center content */}
       <div className="relative z-10 text-center px-6 max-w-5xl">
-        {/* Name — individual backdrop so the 3D object peeks around the text */}
+        {/* Name — annotation chip: tight bg + 1px border makes it a label, not a box */}
         <h1
           ref={nameRef}
-          className="font-display font-bold text-[clamp(44px,8vw,96px)] leading-none tracking-tight inline-block px-4 py-1"
+          className="font-display font-bold text-[clamp(44px,8vw,96px)] leading-none tracking-tight inline-block px-5 py-1"
           style={{
             opacity: 0,
             color: 'rgb(var(--color-text))',
-            background: 'rgba(var(--color-bg), 0.55)',
-            backdropFilter: 'blur(6px)',
-            WebkitBackdropFilter: 'blur(6px)',
+            background: 'rgba(var(--bg-rgb), 0.90)',
+            border: '1px solid rgba(var(--bg-rgb), 0)',
+            outline: '1px solid rgba(59,130,246,0.18)',
           }}
         >
           Manuel Nájera
@@ -85,9 +92,8 @@ export default function Hero() {
             className="font-mono text-xl sm:text-2xl px-3 py-0.5"
             style={{
               color: theme === 'light' ? 'rgb(var(--color-text))' : 'rgb(var(--color-accent))',
-              background: 'rgba(var(--color-bg), 0.50)',
-              backdropFilter: 'blur(4px)',
-              WebkitBackdropFilter: 'blur(4px)',
+              background: 'rgba(var(--bg-rgb), 0.90)',
+              outline: '1px solid rgba(59,130,246,0.14)',
             }}
           >
             {displayed}
@@ -101,9 +107,8 @@ export default function Hero() {
           style={{
             opacity: 0,
             color: 'rgb(var(--color-muted))',
-            background: 'rgba(var(--color-bg), 0.45)',
-            backdropFilter: 'blur(4px)',
-            WebkitBackdropFilter: 'blur(4px)',
+            background: 'rgba(var(--bg-rgb), 0.90)',
+            outline: '1px solid rgba(59,130,246,0.12)',
           }}
         >
           {t('hero.tagline')}
@@ -111,7 +116,14 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-6 font-mono text-xs text-muted/60 z-10 bounce-y">
+      <div
+        className="absolute bottom-8 right-6 font-mono text-xs z-10 bounce-y px-2 py-0.5"
+        style={{
+          color: 'rgb(var(--color-muted))',
+          background: 'rgba(var(--bg-rgb), 0.88)',
+          outline: '1px solid rgba(59,130,246,0.12)',
+        }}
+      >
         {t('hero.scroll')}
       </div>
     </section>
