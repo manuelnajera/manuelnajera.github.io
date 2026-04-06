@@ -380,22 +380,29 @@ export default function BackgroundCanvas() {
     refs.bridgeMat = bridgeMat
 
     // Desktop: bridges form an L-shaped infrastructure complex at mid-distance.
-    // Mobile: camera starts at angle=-0.25, sitting at (27.1, 5.5, -6.9) looking at origin.
+    // Mobile: camera starts at angle=-0.25 → position (27.1, 5.5, -6.9) looking at origin.
     //   Camera forward XZ ≈ (-0.969, 0, 0.246). Horizontal FOV ≈ 43° (±21.5° from center).
-    //   Previous attempts placed bridges at 5–11° from center → piled on top of the tower.
-    //   Solution: position bridge centers so each shows ONE pylon at ~15° on opposite sides:
-    //     Bridge 1 center (12, 0, 3)  → near pylon at (5.3, 0, -7.4) appears 15.7° RIGHT
-    //     Bridge 2 center (9, 0, -8)  → near pylon at (14.3, 0, 0.2)  appears 15.2° LEFT
-    //   Both use rotation.y = -1.0 (parallel spans) so spans never cross each other.
-    //   Both bridge centers are ≥8 units from tower base (±4.5 units).
+    //
+    //   Key insight: for any point (x, y, z) on a bridge at constant z, its screen-side is
+    //   determined by sign of: 0.247·x + 11.63 (at z=12) or 0.247·x − 7.756 (at z=−8).
+    //
+    //   Bridge 1 at (0, 0, 12), ry=0 → span along X at z=12.
+    //     sign = 0.247·x + 11.63. For x ∈ [−19, 19]: all positive → ALL LEFT of tower.
+    //     Near pylon at (−12.35, 0, 12) appears 11.2° LEFT. Min clearance to tower: 12 units.
+    //
+    //   Bridge 2 at (10, 0, −8), ry=0 → span along X at z=−8.
+    //     sign = 0.247·x − 7.756. For x ∈ [2, 18]: all negative → ALL RIGHT of tower.
+    //     Pylons appear at 9.2° and 11.4° RIGHT. Min clearance to tower: 8.25 units.
+    //
+    //   Both bridges span ry=0 (along world X), so spans never intersect each other (z=12 vs z=−8).
     const br1 = new THREE.LineSegments(bridgeGeo1, bridgeMat)
-    br1.position.set(currentMobile ? 12 : 0, 0, currentMobile ? 3 : 22)
-    br1.rotation.y = currentMobile ? -1.0 : 0.15
+    br1.position.set(0, 0, currentMobile ? 12 : 22)
+    br1.rotation.y = currentMobile ? 0 : 0.15
     scene.add(br1)
 
     const br2 = new THREE.LineSegments(bridgeGeo2, bridgeMat)
-    br2.position.set(currentMobile ? 9 : 22, 0, currentMobile ? -8 : -4)
-    br2.rotation.y = currentMobile ? -1.0 : Math.PI / 2 + 0.22
+    br2.position.set(currentMobile ? 10 : 22, 0, currentMobile ? -8 : -4)
+    br2.rotation.y = currentMobile ? 0 : Math.PI / 2 + 0.22
     scene.add(br2)
 
     // ── Node glow points (desktop only) ───────────────────────────────────
@@ -489,10 +496,10 @@ export default function BackgroundCanvas() {
       if (nowMobile !== currentMobile) {
         currentMobile = nowMobile
         cam.fov = nowMobile ? 70 : 55
-        br1.position.set(nowMobile ? 12 : 0,  0, nowMobile ? 3  : 22)
-        br1.rotation.y = nowMobile ? -1.0 : 0.15
-        br2.position.set(nowMobile ? 9 : 22, 0, nowMobile ? -8 : -4)
-        br2.rotation.y = nowMobile ? -1.0 : Math.PI / 2 + 0.22
+        br1.position.set(0, 0, nowMobile ? 12 : 22)
+        br1.rotation.y = nowMobile ? 0 : 0.15
+        br2.position.set(nowMobile ? 10 : 22, 0, nowMobile ? -8 : -4)
+        br2.rotation.y = nowMobile ? 0 : Math.PI / 2 + 0.22
       }
       cam.updateProjectionMatrix()
     }
