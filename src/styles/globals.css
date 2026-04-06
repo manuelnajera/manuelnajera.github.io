@@ -44,8 +44,28 @@ html {
   scroll-behavior: smooth;
   /* Slightly larger base — scales all rem values proportionally */
   font-size: 17px;
+  /* Atmospheric gradient: a faint blue glow at the visual center, fading to near-black.
+     The Three.js canvas sits on top with alpha:true — the glow peeks between wireframe members. */
   background-color: rgb(var(--color-bg));
+  background-image:
+    radial-gradient(ellipse 75% 55% at 50% 28%,
+      rgba(59, 130, 246, 0.11) 0%,
+      transparent 68%),
+    radial-gradient(ellipse 40% 60% at 78% 68%,
+      rgba(59, 130, 246, 0.06) 0%,
+      transparent 58%);
   color: rgb(var(--color-text));
+}
+
+[data-theme="light"] html,
+[data-theme="light"] {
+  background-image:
+    radial-gradient(ellipse 75% 55% at 50% 28%,
+      rgba(37, 99, 235, 0.09) 0%,
+      transparent 65%),
+    radial-gradient(ellipse 40% 60% at 78% 68%,
+      rgba(37, 99, 235, 0.05) 0%,
+      transparent 55%);
 }
 
 body {

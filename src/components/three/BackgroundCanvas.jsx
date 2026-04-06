@@ -57,6 +57,90 @@ function buildNodePoints() {
   return new Float32Array(v)
 }
 
+// Distant particle sphere — Fibonacci distribution for even coverage.
+// Radius 55–68: well outside the camera orbit (18–28), so it's always "behind"
+// everything, but close enough that fog doesn't erase it completely.
+function buildDistantParticles(count = 420, minR = 55, maxR = 68) {
+  const v = []
+  const golden = Math.PI * (3 - Math.sqrt(5))  // golden angle
+  for (let i = 0; i < count; i++) {
+    const y      = 1 - (i / (count - 1)) * 2
+    const r      = Math.sqrt(Math.max(0, 1 - y * y))
+    const theta  = golden * i
+    const radius = minR + (Math.random() * (maxR - minR))
+    v.push(radius * r * Math.cos(theta), radius * y, radius * r * Math.sin(theta))
+  }
+  return new Float32Array(v)
+}
+
+// ── Suspension Bridge ─────────────────────────────────────────────────────────
+// Two pylons with back-stays, a parabolic main cable, vertical suspenders,
+// and a cross-braced deck — all parametric, no files.
+function buildSuspensionBridge({
+  span      = 38,   // total deck length
+  towerH    = 9,    // pylon height above deck
+  deckY     = 0.5,  // deck elevation above y=0
+  roadW     = 5,    // separation between the two cable lines
+  cableSegs = 22,   // segments approximating the parabola
+  suspCount = 16,   // number of vertical hangers
+} = {}) {
+  const v    = []
+  const push = (x1, y1, z1, x2, y2, z2) => v.push(x1, y1, z1, x2, y2, z2)
+
+  const halfSpan = span / 2
+  const towerX   = halfSpan * 0.65   // pylons inset from bridge ends
+  const halfW    = roadW / 2
+  const topY     = deckY + towerH
+  const sagY     = deckY + 1.4       // cable nadir at mid-span
+
+  // Parabola: towers are at ±towerX, highest point; mid-span is sagY
+  const cableAt = (x) => sagY + (topY - sagY) * (x / towerX) ** 2
+
+  for (const cz of [-halfW, halfW]) {
+    // Back-stay cables: anchor end → pylon top
+    push(-halfSpan, deckY, cz,  -towerX, topY, cz)
+    push( towerX,   topY,  cz,   halfSpan, deckY, cz)
+
+    // Main cable: pylon-to-pylon parabola
+    for (let i = 0; i < cableSegs; i++) {
+      const x1 = -towerX + towerX * 2 * (i       / cableSegs)
+      const x2 = -towerX + towerX * 2 * ((i + 1) / cableSegs)
+      push(x1, cableAt(x1), cz, x2, cableAt(x2), cz)
+    }
+
+    // Suspenders: hangers from cable down to deck
+    for (let i = 1; i < suspCount; i++) {
+      const x = -towerX + towerX * 2 * (i / suspCount)
+      push(x, cableAt(x), cz, x, deckY, cz)
+    }
+  }
+
+  // Pylons — two towers, each with two legs, four struts, and X-bracing
+  for (const tx of [-towerX, towerX]) {
+    push(tx, 0,     -halfW,  tx, topY, -halfW)   // leg A: ground → top
+    push(tx, 0,      halfW,  tx, topY,  halfW)   // leg B
+    for (let i = 0; i <= 3; i++) {               // horizontal struts
+      const ty = deckY + towerH * (i / 3)
+      push(tx, ty, -halfW, tx, ty, halfW)
+    }
+    push(tx, deckY, -halfW,  tx, topY,  halfW)  // X-brace
+    push(tx, deckY,  halfW,  tx, topY, -halfW)
+  }
+
+  // Deck — two edge rails, cross beams, and diagonal floor bracing
+  push(-halfSpan, deckY, -halfW,  halfSpan, deckY, -halfW)
+  push(-halfSpan, deckY,  halfW,  halfSpan, deckY,  halfW)
+  const panels = 14
+  for (let p = 0; p <= panels; p++) {
+    const x  = -halfSpan + span / panels * p
+    const x2 = x + span / panels
+    push(x, deckY, -halfW, x, deckY, halfW)                        // cross beam
+    if (p < panels) push(x, deckY, -halfW, x2, deckY, halfW)       // floor brace
+  }
+
+  return new Float32Array(v)
+}
+
 function buildGroundGrid(size = 48, step = 2.8) {
   const v = []
   const n = Math.round(size / step)
@@ -114,15 +198,15 @@ function sampleCam(progress) {
 // Switch to NormalBlending in light and compensate with higher opacity.
 const THEME_CFG = {
   dark: {
-    colors:   { tower: 0x3b82f6, cross: 0x3b82f6, grid: 0x3b82f6,
+    colors:   { tower: 0x3b82f6, cross: 0x3b82f6, grid: 0x3b82f6, bridge: 0x3b82f6,
                 node: 0x93c5fd, fgFrag: 0x3b82f6, bgFrag: 0x3b82f6, fog: 0x050508 },
-    opacity:  { tower: 0.82, cross: 0.30, grid: 0.09, node: 0.90, fg: 0.28, bg: 0.09 },
+    opacity:  { tower: 0.82, cross: 0.30, grid: 0.09, node: 0.90, fg: 0.28, bg: 0.09, dust: 0.55, bridge: 0.58 },
     blending: THREE.AdditiveBlending,
   },
   light: {
-    colors:   { tower: 0x1e40af, cross: 0x1e3a8a, grid: 0x1e40af,
-                node: 0x1d4ed8, fgFrag: 0x1e40af, bgFrag: 0x1e40af, fog: 0xf1f5f9 },
-    opacity:  { tower: 0.92, cross: 0.65, grid: 0.25, node: 0.95, fg: 0.60, bg: 0.22 },
+    colors:   { tower: 0x1e40af, cross: 0x1e3a8a, grid: 0x1e40af, bridge: 0x1e40af,
+                node: 0x1d4ed8, fgFrag: 0x1e40af, bgFrag: 0x1e40af, dust: 0x1e40af, fog: 0xf1f5f9 },
+    opacity:  { tower: 0.92, cross: 0.65, grid: 0.25, node: 0.95, fg: 0.60, bg: 0.22, dust: 0.50, bridge: 0.80 },
     blending: THREE.NormalBlending,
   },
 }
@@ -154,6 +238,8 @@ export default function BackgroundCanvas() {
     applyMat(r.gridMat,  c.grid,   o.grid)
     applyMat(r.fgMat,    c.fgFrag, o.fg)
     applyMat(r.bgMat,    c.bgFrag, o.bg)
+    applyMat(r.dustMat,   c.dust,   o.dust)
+    applyMat(r.bridgeMat, c.bridge, o.bridge)
     if (r.nodeMat) {
       r.nodeMat.color.setHex(c.node)
       r.nodeMat.opacity = o.node
@@ -249,6 +335,52 @@ export default function BackgroundCanvas() {
     })
     refs.gridMat = gridMat
     scene.add(new THREE.LineSegments(gridGeo, gridMat))
+
+    // ── Distant particle atmosphere — Fibonacci sphere at radius 55–68 ────
+    // Sits far behind the tower and fragments. As the camera orbits, these
+    // shift in the opposite direction from foreground elements — completing
+    // the full depth stack: particles → bg fragments → tower → fg fragments.
+    const dustGeo = new THREE.BufferGeometry()
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(buildDistantParticles(), 3))
+    const dustMat = new THREE.PointsMaterial({
+      color: c.dust ?? c.node, size: 0.22, transparent: true, opacity: o.dust,
+      blending: b, depthWrite: false, sizeAttenuation: true,
+    })
+    refs.dustMat = dustMat
+    scene.add(new THREE.Points(dustGeo, dustMat))
+
+    // ── Suspension bridges — infrastructure context ────────────────────────
+    // Two bridges in the mid-distance, placed at perpendicular orientations.
+    // Bridge 1 (behind tower, spans X): visible from initial front-facing camera.
+    // Bridge 2 (right side, spans Z): comes into view as camera orbits left.
+    // Together they form an L-shaped infrastructure complex around the tower.
+    const bridgeGeo1 = new THREE.BufferGeometry()
+    bridgeGeo1.setAttribute('position', new THREE.BufferAttribute(
+      buildSuspensionBridge({ span: 38, towerH: 9, roadW: 5.5 }), 3
+    ))
+    const bridgeGeo2 = new THREE.BufferGeometry()
+    bridgeGeo2.setAttribute('position', new THREE.BufferAttribute(
+      buildSuspensionBridge({ span: 30, towerH: 7, roadW: 4.5 }), 3
+    ))
+
+    const bridgeMat = new THREE.LineBasicMaterial({
+      color: c.bridge, transparent: true,
+      opacity: isMobile ? o.bridge * 0.75 : o.bridge,
+      blending: b, depthWrite: false,
+    })
+    refs.bridgeMat = bridgeMat
+
+    // Bridge 1: behind the tower, spanning left-right
+    const br1 = new THREE.LineSegments(bridgeGeo1, bridgeMat)
+    br1.position.set(0, 0, 22)
+    br1.rotation.y = 0.15    // slight angle so it doesn't look perfectly parallel
+    scene.add(br1)
+
+    // Bridge 2: to the right, spanning front-back (rotated 90°)
+    const br2 = new THREE.LineSegments(bridgeGeo2, bridgeMat)
+    br2.position.set(22, 0, -4)
+    br2.rotation.y = Math.PI / 2 + 0.22
+    scene.add(br2)
 
     // ── Node glow points (desktop only) ───────────────────────────────────
     let nodeMat = null
@@ -354,8 +486,10 @@ export default function BackgroundCanvas() {
       towerGeo.dispose()
       crossGeo.dispose()
       gridGeo.dispose()
+      dustGeo.dispose()
+      bridgeGeo1.dispose(); bridgeGeo2.dispose()
       towerMat.dispose(); crossMat.dispose(); gridMat.dispose()
-      fgMat.dispose(); bgMat.dispose()
+      fgMat.dispose(); bgMat.dispose(); dustMat.dispose(); bridgeMat.dispose()
       if (nodeMat) nodeMat.dispose()
       renderer.dispose()
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement)
