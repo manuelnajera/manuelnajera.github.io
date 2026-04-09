@@ -3,7 +3,7 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation.js'
 
 // Update these before publishing
 const LINKEDIN_URL = 'https://linkedin.com/in/manuelnajera'
-const EMAIL = 'mailto:contact@manuelnajera.dev'
+const EMAIL = 'mailto:manuelnajera.dev@gmail.com'
 
 export default function Contact() {
   const { t } = useTranslation()
