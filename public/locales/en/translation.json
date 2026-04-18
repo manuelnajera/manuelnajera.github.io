@@ -18,7 +18,7 @@
   "about": {
     "label": "02 / About",
     "pullQuote": "Civil engineer who crossed into software.",
-    "bio": "I spent years building highway infrastructure — road asset management, construction supervision, maintenance coordination. Then I started automating the paperwork with VBA, then building the tools the industry actually needed. Two years ago I crossed fully into software. I now build production systems from the ground up: a full-stack commerce platform with a real payment terminal, and a browser-based 3D construction monitoring platform that runs the Kabsch alignment algorithm from scratch. DeltaVis is not a pivot away from engineering — it is the extension of it.",
+    "bio": "I spent years building highway infrastructure — road asset management, construction supervision, maintenance coordination. Then I started automating the paperwork with VBA, then building the tools the industry actually needed. Two years ago I crossed fully into software. I now build production systems from the ground up: a full-stack commerce platform with a real payment terminal, and a browser-based 3D construction monitoring platform that runs the Kabsch alignment algorithm from scratch. DeltaVis is not a pivot away from engineering — it is the extension of it. I also take on freelance projects: if you need a website, an online store, or a custom system built, that is what I do.",
     "timeline": [
       {
         "period": "2015–2017",
@@ -31,7 +31,7 @@
         "description": "Road asset management, maintenance coordination, VBA automation"
       },
       {
-        "period": "2022–present",
+        "period": "2022–2025",
         "role": "Remote Data Analyst, TELUS International",
         "description": "Data quality and analysis for international clients"
       },
@@ -68,7 +68,7 @@
     "insumos": {
       "title": "InsumosDentales Chiapas",
       "url": "insumosdentaleschiapas.com.mx",
-      "oneliner": "Full-stack commerce + physical POS for a dental distributor.",
+      "oneliner": "A dental supply business runs on this — online store, physical payment terminal, loyalty rewards. In production today.",
       "description": "Dual-channel system: online store with MercadoPago Checkout Pro and a physical POS running the MercadoPago Point Smart 2 terminal. FCM push notifications, loyalty rewards with race condition-safe Firestore transactions, multi-role access, and a complete order fulfillment workflow.",
       "tags": [
         "React",
@@ -127,9 +127,18 @@
   },
   "contact": {
     "label": "05 / Contact",
-    "headline": "Open to remote full-stack roles and freelance projects.",
-    "linkedin": "View LinkedIn ↗",
-    "email": "Send email ↗",
+    "forBusiness": {
+      "label": "For businesses",
+      "headline": "Need a website, an online store, or a custom system?",
+      "body": "I build production software for real businesses — not templates, not no-code. From the first commit to launch and beyond.",
+      "cta": "Send email ↗"
+    },
+    "forHiring": {
+      "label": "For tech roles",
+      "headline": "Open to remote full-stack positions.",
+      "body": "Civil engineering background + production systems in React, Firebase, and Three.js. Available now.",
+      "cta": "View LinkedIn ↗"
+    },
     "built": "Built with React + Three.js · Deployed on GitHub Pages",
     "copyright": "© 2026 Manuel Nájera"
   }

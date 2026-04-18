@@ -18,7 +18,7 @@
   "about": {
     "label": "02 / Sobre mí",
     "pullQuote": "Ingeniero civil que cruzó al mundo del software.",
-    "bio": "Pasé años construyendo infraestructura de carreteras — gestión de activos viales, supervisión de obras, coordinación de mantenimiento. Luego empecé a automatizar el papeleo con VBA, y después a construir las herramientas que la industria realmente necesitaba. Hace dos años crucé completamente al software. Ahora construyo sistemas de producción desde cero: una plataforma de comercio completa con terminal de pago física, y una plataforma 3D de monitoreo de construcción en el navegador que implementa el algoritmo Kabsch desde cero. DeltaVis no es un pivote alejado de la ingeniería — es su extensión.",
+    "bio": "Pasé años construyendo infraestructura de carreteras — gestión de activos viales, supervisión de obras, coordinación de mantenimiento. Luego empecé a automatizar el papeleo con VBA, y después a construir las herramientas que la industria realmente necesitaba. Hace dos años crucé completamente al software. Ahora construyo sistemas de producción desde cero: una plataforma de comercio completa con terminal de pago física, y una plataforma 3D de monitoreo de construcción en el navegador que implementa el algoritmo Kabsch desde cero. DeltaVis no es un pivote alejado de la ingeniería — es su extensión. También tomo proyectos freelance: si necesitas un sitio web, una tienda en línea o un sistema a medida, eso es lo que hago.",
     "timeline": [
       {
         "period": "2015–2017",
@@ -31,7 +31,7 @@
         "description": "Gestión de activos viales, coordinación de mantenimiento, automatización VBA"
       },
       {
-        "period": "2022–presente",
+        "period": "2022–2025",
         "role": "Analista de Datos Remoto, TELUS International",
         "description": "Calidad y análisis de datos para clientes internacionales"
       },
@@ -68,7 +68,7 @@
     "insumos": {
       "title": "InsumosDentales Chiapas",
       "url": "insumosdentaleschiapas.com.mx",
-      "oneliner": "Comercio full-stack + POS físico para un distribuidor dental.",
+      "oneliner": "Un negocio de insumos dentales opera con esto — tienda en línea, terminal de pago física, puntos de lealtad. En producción hoy.",
       "description": "Sistema de doble canal: tienda en línea con MercadoPago Checkout Pro y punto de venta físico con terminal MercadoPago Point Smart 2. Notificaciones push FCM, puntos de lealtad con transacciones Firestore seguras ante condiciones de carrera, acceso multi-rol y flujo completo de gestión de pedidos.",
       "tags": [
         "React",
@@ -127,9 +127,18 @@
   },
   "contact": {
     "label": "05 / Contacto",
-    "headline": "Disponible para roles remotos full-stack y proyectos freelance.",
-    "linkedin": "Ver LinkedIn ↗",
-    "email": "Enviar correo ↗",
+    "forBusiness": {
+      "label": "Para negocios",
+      "headline": "¿Necesitas un sitio web, una tienda en línea o un sistema a medida?",
+      "body": "Construyo software de producción para negocios reales — sin plantillas, sin no-code. Desde el primer commit hasta el lanzamiento y más allá.",
+      "cta": "Enviar correo ↗"
+    },
+    "forHiring": {
+      "label": "Para roles tech",
+      "headline": "Disponible para posiciones remotas full-stack.",
+      "body": "Formación en ingeniería civil + sistemas de producción en React, Firebase y Three.js. Disponible ahora.",
+      "cta": "Ver LinkedIn ↗"
+    },
     "built": "Construido con React + Three.js · Desplegado en GitHub Pages",
     "copyright": "© 2026 Manuel Nájera"
   }
