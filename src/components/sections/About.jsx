@@ -19,9 +19,11 @@ export default function About() {
           >
             {t('about.pullQuote')}
           </h2>
-          <p className="about-anim font-body text-base sm:text-lg leading-relaxed" style={{ color: 'rgb(var(--color-muted))' }}>
-            {t('about.bio')}
-          </p>
+          {t('about.bio').split('\n\n').map((para, i) => (
+            <p key={i} className="about-anim font-body text-base sm:text-lg leading-relaxed mb-5 last:mb-0" style={{ color: 'rgb(var(--color-muted))' }}>
+              {para}
+            </p>
+          ))}
         </div>
 
         {/* Right — timeline */}

@@ -9,7 +9,7 @@
     "roles": [
       "Ingeniero Civil",
       "Desarrollador Full-Stack",
-      "Constructor de Sistemas 3D",
+      "iOS · Android · macOS",
       "Infraestructura + Software"
     ],
     "tagline": "Construyo software para el mundo físico.",
@@ -18,7 +18,7 @@
   "about": {
     "label": "02 / Sobre mí",
     "pullQuote": "Ingeniero civil que cruzó al mundo del software.",
-    "bio": "Pasé años construyendo infraestructura de carreteras — gestión de activos viales, supervisión de obras, coordinación de mantenimiento. Luego empecé a automatizar el papeleo con VBA, y después a construir las herramientas que la industria realmente necesitaba. Hace dos años crucé completamente al software. Ahora construyo sistemas de producción desde cero: una plataforma de comercio completa con terminal de pago física, y una plataforma 3D de monitoreo de construcción en el navegador que implementa el algoritmo Kabsch desde cero. DeltaVis no es un pivote alejado de la ingeniería — es su extensión. También tomo proyectos freelance: si necesitas un sitio web, una tienda en línea o un sistema a medida, eso es lo que hago.",
+    "bio": "Pasé años construyendo infraestructura de carreteras — gestión de activos viales, supervisión de obras, coordinación de mantenimiento. Luego empecé a automatizar el papeleo con VBA, y después a construir las herramientas que la industria realmente necesitaba.\n\nHoy tengo cuatro sistemas en desarrollo activo o producción: una plataforma de comercio dental que procesa más de 300 compras diarias con una terminal de pago física; una óptica con WebXR y prueba 3D de lentes; una plataforma 3D de monitoreo de construcción con apps nativas para iOS y Android; y una utilidad macOS distribuida fuera del App Store. Web, WebXR, iOS, Android, macOS — construido desde cero, no ensamblado con plantillas.\n\nLa formación en ingeniería civil no es anecdótica. Es por eso que construyo software que funciona en el mundo físico.",
     "timeline": [
       {
         "period": "2015–2017",
@@ -38,12 +38,17 @@
       {
         "period": "2025–presente",
         "role": "Desarrollador Full-Stack Freelance",
-        "description": "POS dental + dashboards para programa gubernamental de alfabetización"
+        "description": "Sistemas de producción para distribución dental, óptica y programas de alfabetización — web, WebXR y móvil"
       },
       {
         "period": "2026–presente",
         "role": "Fundador, DeltaVis",
-        "description": "Plataforma 3D de monitoreo de construcción para ingenieros civiles"
+        "description": "Plataforma 3D de monitoreo de construcción — app web + captura nativa iOS y Android"
+      },
+      {
+        "period": "2026–presente",
+        "role": "Desarrollador Independiente, ScreenBoundary",
+        "description": "Utilidad macOS distribuida de forma independiente — firmada, notarizada, fuera del App Store"
       }
     ]
   },
@@ -52,24 +57,28 @@
     "subheader": "Sistemas en producción. No demos.",
     "featured": "DESTACADO",
     "live": "Sitio en vivo ↗",
+    "inDevelopment": "EN DEV",
+    "macosApp": "macOS",
     "deltavis": {
       "title": "DeltaVis",
       "url": "deltavis.app",
       "oneliner": "Plataforma 3D de monitoreo de construcción para ingenieros civiles.",
-      "description": "Carga dos escaneos 3D del mismo sitio de construcción en fechas distintas, los alinea matemáticamente usando el algoritmo Kabsch — Jacobi SVD implementado desde cero, sin librería de álgebra lineal — mide los cambios volumétricos y exporta un reporte PDF profesional. Construido para los flujos de trabajo reales de ingenieros civiles y operadores de drones.",
+      "description": "Carga dos escaneos 3D del mismo sitio de construcción en fechas distintas, los alinea matemáticamente usando el algoritmo Kabsch — Jacobi SVD implementado desde cero, sin librería de álgebra lineal — mide los cambios volumétricos y exporta un reporte PDF profesional. Las apps nativas para iOS y Android permiten capturar directamente en obra. Construido para los flujos de trabajo reales de ingenieros civiles y operadores de drones.",
       "tags": [
         "React",
         "Three.js",
         "Firebase",
         "Claude API",
+        "Swift",
+        "Kotlin",
         "GitHub Actions"
       ]
     },
     "insumos": {
       "title": "InsumosDentales Chiapas",
       "url": "insumosdentaleschiapas.com.mx",
-      "oneliner": "Un negocio de insumos dentales opera con esto — tienda en línea, terminal de pago física, puntos de lealtad. En producción hoy.",
-      "description": "Sistema de doble canal: tienda en línea con MercadoPago Checkout Pro y punto de venta físico con terminal MercadoPago Point Smart 2. Notificaciones push FCM, puntos de lealtad con transacciones Firestore seguras ante condiciones de carrera, acceso multi-rol y flujo completo de gestión de pedidos.",
+      "oneliner": "Un negocio de insumos dentales opera con esto — más de 300 compras diarias, 100+ con terminal física. En producción hoy.",
+      "description": "En producción: más de 100 usuarios registrados, 300+ compras diarias a través del POS, más de 100 procesadas con la terminal MercadoPago Point Smart 2. Sistema de doble canal: tienda en línea con MercadoPago Checkout Pro y POS físico completo. Notificaciones push FCM, puntos de lealtad con transacciones Firestore seguras ante condiciones de carrera, acceso multi-rol y flujo completo de gestión de pedidos.",
       "tags": [
         "React",
         "Firebase",
@@ -77,6 +86,32 @@
         "Cloud Functions",
         "Cloudinary",
         "FCM"
+      ]
+    },
+    "opticas": {
+      "title": "Ópticas Valverde",
+      "url": "opticas-valverde.web.app",
+      "oneliner": "Ecommerce de óptica con prueba virtual de lentes en 3D y POS multi-sucursal.",
+      "description": "Los clientes exploran lentes con modelos 3D en tiempo real, los prueban virtualmente con WebXR o acceden a un probador virtual con hasta tres monturas cargadas simultáneamente. Detrás del mostrador: POS para múltiples sucursales con inventario compartido, y expedientes de clientes que incluyen prescripciones médicas escaneadas. Apple Pay vía Stripe. Apple Sign-In vía Firebase.",
+      "tags": [
+        "React",
+        "Three.js",
+        "WebXR",
+        "Firebase",
+        "Stripe",
+        "Cloudinary"
+      ]
+    },
+    "screenboundary": {
+      "title": "ScreenBoundary",
+      "url": "screenboundary.com",
+      "oneliner": "Utilidad macOS que convierte zonas de un monitor físico en pantallas virtuales independientes.",
+      "description": "Dos usos, un solo binario: rescata un monitor dañado trazando zonas sobre el vidrio intacto — cada una se convierte en su propio display con barra de menús, Spaces y pantalla completa nativa. O divide un ultrawide de 34–49″ en 2–3 pantallas reales. Usa una API privada de macOS (CGVirtualDisplay). Firmado con Developer ID, notarizado, con reversión automática integrada. Sin cuenta, sin analíticas.",
+      "tags": [
+        "Swift",
+        "macOS",
+        "CGVirtualDisplay",
+        "Lemon Squeezy"
       ]
     },
     "inProduction": "LIVE"
@@ -91,6 +126,7 @@
           "Vite",
           "Tailwind CSS",
           "Three.js",
+          "WebXR",
           "Zustand",
           "PWA",
           "jsPDF"
@@ -106,6 +142,7 @@
           "Firebase Hosting",
           "GitHub Actions",
           "MercadoPago",
+          "Stripe",
           "Cloudinary",
           "FCM"
         ]
@@ -120,7 +157,9 @@
           "AutoCAD",
           "Excel / VBA",
           "Python",
-          "SQL"
+          "SQL",
+          "Swift",
+          "Kotlin"
         ]
       }
     ]

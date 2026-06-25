@@ -33,6 +33,28 @@ export default function Projects() {
             liveLabel={t('projects.live')}
             href="deltavis.app"
           />
+          <ProjectCard
+            title={t('projects.opticas.title')}
+            url={t('projects.opticas.url')}
+            oneliner={t('projects.opticas.oneliner')}
+            description={t('projects.opticas.description')}
+            tags={t('projects.opticas.tags', { returnObjects: true })}
+            featured
+            featuredLabel={t('projects.inDevelopment')}
+            liveLabel={t('projects.live')}
+            href="opticas-valverde.web.app"
+          />
+          <ProjectCard
+            title={t('projects.screenboundary.title')}
+            url={t('projects.screenboundary.url')}
+            oneliner={t('projects.screenboundary.oneliner')}
+            description={t('projects.screenboundary.description')}
+            tags={t('projects.screenboundary.tags', { returnObjects: true })}
+            featured
+            featuredLabel={t('projects.macosApp')}
+            liveLabel={t('projects.live')}
+            href="screenboundary.com"
+          />
         </div>
       </div>
     </section>

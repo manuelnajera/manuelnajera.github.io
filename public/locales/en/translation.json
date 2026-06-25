@@ -9,7 +9,7 @@
     "roles": [
       "Civil Engineer",
       "Full-Stack Developer",
-      "3D Systems Builder",
+      "iOS · Android · macOS",
       "Infrastructure + Software"
     ],
     "tagline": "I build software for the physical world.",
@@ -18,7 +18,7 @@
   "about": {
     "label": "02 / About",
     "pullQuote": "Civil engineer who crossed into software.",
-    "bio": "I spent years building highway infrastructure — road asset management, construction supervision, maintenance coordination. Then I started automating the paperwork with VBA, then building the tools the industry actually needed. Two years ago I crossed fully into software. I now build production systems from the ground up: a full-stack commerce platform with a real payment terminal, and a browser-based 3D construction monitoring platform that runs the Kabsch alignment algorithm from scratch. DeltaVis is not a pivot away from engineering — it is the extension of it. I also take on freelance projects: if you need a website, an online store, or a custom system built, that is what I do.",
+    "bio": "I spent years building highway infrastructure — road asset management, construction supervision, maintenance coordination. Then I started automating the paperwork with VBA, then building the tools the industry actually needed.\n\nToday I have four systems in active development or production: a dental commerce platform processing 300+ daily purchases through a physical payment terminal; a WebXR optical store with 3D try-on and multi-location POS; a 3D construction monitoring platform with native iOS and Android apps for on-site capture; and a macOS utility distributed outside the App Store. Web, WebXR, iOS, Android, macOS — built from scratch, not assembled from templates.\n\nThe civil engineering background is not incidental. It is why I build software that works in the physical world.",
     "timeline": [
       {
         "period": "2015–2017",
@@ -38,12 +38,17 @@
       {
         "period": "2025–present",
         "role": "Freelance Full-Stack Developer",
-        "description": "Dental commerce POS + government literacy program dashboards"
+        "description": "Production systems for dental supply, optical retail, and literacy programs — web, WebXR, and mobile"
       },
       {
         "period": "2026–present",
         "role": "Founder, DeltaVis",
-        "description": "3D construction monitoring platform for civil engineers"
+        "description": "3D construction monitoring platform — web app + native iOS and Android capture"
+      },
+      {
+        "period": "2026–present",
+        "role": "Indie Developer, ScreenBoundary",
+        "description": "macOS utility sold independently — signed, notarized, distributed outside the App Store"
       }
     ]
   },
@@ -52,24 +57,28 @@
     "subheader": "Production systems. Not demos.",
     "featured": "FEATURED",
     "live": "Live site ↗",
+    "inDevelopment": "IN DEV",
+    "macosApp": "macOS",
     "deltavis": {
       "title": "DeltaVis",
       "url": "deltavis.app",
       "oneliner": "3D construction monitoring platform for civil engineers.",
-      "description": "Load two 3D scans of the same construction site at different dates, align them mathematically using the Kabsch algorithm — Jacobi SVD implemented from scratch, no linear algebra library — measure volumetric differences, and export a professional PDF report. Built for the workflows civil engineers and drone operators actually use.",
+      "description": "Load two 3D scans of the same construction site at different dates, align them mathematically using the Kabsch algorithm — Jacobi SVD implemented from scratch, no linear algebra library — measure volumetric differences, and export a professional PDF report. Native iOS and Android apps let engineers capture directly on site. Built for the workflows civil engineers and drone operators actually use.",
       "tags": [
         "React",
         "Three.js",
         "Firebase",
         "Claude API",
+        "Swift",
+        "Kotlin",
         "GitHub Actions"
       ]
     },
     "insumos": {
       "title": "InsumosDentales Chiapas",
       "url": "insumosdentaleschiapas.com.mx",
-      "oneliner": "A dental supply business runs on this — online store, physical payment terminal, loyalty rewards. In production today.",
-      "description": "Dual-channel system: online store with MercadoPago Checkout Pro and a physical POS running the MercadoPago Point Smart 2 terminal. FCM push notifications, loyalty rewards with race condition-safe Firestore transactions, multi-role access, and a complete order fulfillment workflow.",
+      "oneliner": "A dental supply business runs on this — 300+ daily purchases, 100+ through a physical terminal. In production today.",
+      "description": "Live in production: 100+ registered users, 300+ daily purchases through the POS, over 100 processed through the MercadoPago Point Smart 2 terminal. Dual-channel system: online store with MercadoPago Checkout Pro and a full physical POS. FCM push notifications, loyalty rewards with race condition-safe Firestore transactions, multi-role access, and a complete order fulfillment workflow.",
       "tags": [
         "React",
         "Firebase",
@@ -77,6 +86,32 @@
         "Cloud Functions",
         "Cloudinary",
         "FCM"
+      ]
+    },
+    "opticas": {
+      "title": "Ópticas Valverde",
+      "url": "opticas-valverde.web.app",
+      "oneliner": "Optical store ecommerce with 3D glasses try-on and multi-location POS.",
+      "description": "Customers browse glasses with real-time 3D models, try them on virtually via WebXR, or step into a virtual booth with up to three frames loaded side by side. Behind the counter: a POS across multiple locations with shared inventory management, and client records including uploaded medical prescriptions. Apple Pay through Stripe. Apple Sign-In through Firebase.",
+      "tags": [
+        "React",
+        "Three.js",
+        "WebXR",
+        "Firebase",
+        "Stripe",
+        "Cloudinary"
+      ]
+    },
+    "screenboundary": {
+      "title": "ScreenBoundary",
+      "url": "screenboundary.com",
+      "oneliner": "macOS utility that turns regions of one physical monitor into real, independent virtual displays.",
+      "description": "Two use cases, one binary: rescue a cracked monitor by drawing zones over intact glass — each becomes its own display with its own menu bar, Spaces, and native fullscreen. Or split a 34–49″ ultrawide into 2–3 real displays. Built on a private macOS API (CGVirtualDisplay). Signed with Developer ID, notarized, built-in auto-revert failsafe. No account, no analytics.",
+      "tags": [
+        "Swift",
+        "macOS",
+        "CGVirtualDisplay",
+        "Lemon Squeezy"
       ]
     },
     "inProduction": "LIVE"
@@ -91,6 +126,7 @@
           "Vite",
           "Tailwind CSS",
           "Three.js",
+          "WebXR",
           "Zustand",
           "PWA",
           "jsPDF"
@@ -106,6 +142,7 @@
           "Firebase Hosting",
           "GitHub Actions",
           "MercadoPago",
+          "Stripe",
           "Cloudinary",
           "FCM"
         ]
@@ -120,7 +157,9 @@
           "AutoCAD",
           "Excel / VBA",
           "Python",
-          "SQL"
+          "SQL",
+          "Swift",
+          "Kotlin"
         ]
       }
     ]
